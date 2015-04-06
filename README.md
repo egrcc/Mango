@@ -1,2 +1,3 @@
 # Mango
-Mango is markdown editor for linux, written in nw.js with node.js
+
+Mango is markdown editor for linux, written in nw.js with node.js. It is under development.
