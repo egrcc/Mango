@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Markdown Editor</title>
+	<link rel="stylesheet" type="text/css" href="./css/screen.css" media="screen" />
+	<script src="./js/jquery/jquery.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="./js/main.js"></script>
+	<script type="text/javascript" src="./js/taboverride/taboverride.min.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        showProcessingMessages: false,
+        tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] },
+        TeX: { equationNumbers: {autoNumber: "AMS"} }
+      });
+    </script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<script type="text/javascript">
+		global.window = window;
+		global.$ = $;
+        // global.MathJax = MathJax;
+		global.gui = require('nw.gui');
+		init();
+	</script>
+</head>
+<body>
+	<input style="display:none;" id="openFileDialog" type="file" />
+	<input style="display:none;" type="file"  id="saveFileDialog" nwsaveas="file.md" />
+    <textarea name="markdown" id="editor" class="md_editor"></textarea>
+    <div class="md_result">
+    	
+    </div>
+    <div id="buffer"
+       style="display:none;
+              position:absolute; 
+              top:0; left: 0"></div>
+</body>
+</html>
