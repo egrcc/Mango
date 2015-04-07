@@ -60,13 +60,24 @@ function reload(){
 	buffer.innerHTML = (marked(text));
 	MathJax.Hub.Queue(["Typeset",MathJax.Hub,buffer],
       				  ["preview",this]);
+	// f = function(){
+	// 	var resultDiv = global.$('.md_result');
+	// 	resultDiv.html(buffer.innerHTML);
+	// }
+
+	// MathJax.Hub.Queue(["Typeset",MathJax.Hub,buffer]);
+	// setTimeout(f, 1000);
+	// MathJax.Hub.Queue(f); 
 	// console.log(buffer.html());
 	// resultDiv.html(marked(text));
 };
 
 function preview(){
-	var resultDiv = global.$('.md_result');
-	resultDiv.html(buffer.innerHTML);
+	setTimeout(function(){
+		var resultDiv = global.$('.md_result');
+		resultDiv.html(buffer.innerHTML);
+	}, 300);
+	
 }
 
 function loadText(text){
