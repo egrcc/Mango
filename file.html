@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+    <title>Markdown Editor</title>
+	<link rel="stylesheet" type="text/css" href="./css/screen.css" media="screen">
+	<script src="./js/jquery/jquery.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="./js/main.js"></script>
+  <script type="text/javascript" src="./js/editor.js"></script>
+  <script type="text/javascript" src="./js/menu.js"></script>
+	<script type="text/javascript" src="./js/taboverride/taboverride.min.js"></script>
+    <script type="text/x-mathjax-config;executed=true">
+      MathJax.Hub.Config({
+        showProcessingMessages: false,
+        tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] },
+        TeX: { equationNumbers: {autoNumber: "AMS"} }
+      });
+    </script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<script type="text/javascript">
+		global.window = window;
+		global.$ = $;
+        // global.MathJax = MathJax;
+		global.gui = require('nw.gui');
+		init();
+	</script>
+
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Hover_Arrow {position: absolute; width: 15px; height: 11px; cursor: pointer}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">.MathJax_Preview .MJXc-math {color: inherit!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXc-script {font-size: .8em}
+.MJXc-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXc-bold {font-weight: bold}
+.MJXc-italic {font-style: italic}
+.MJXc-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-largeop {font-size: 150%}
+.MJXc-largeop.MJXc-int {vertical-align: -.2em}
+.MJXc-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXc-display {display: block; text-align: center; margin: 1em 0}
+.MJXc-math span {display: inline-block}
+.MJXc-box {display: block!important; text-align: center}
+.MJXc-box:after {content: " "}
+.MJXc-rule {display: block!important; margin-top: .1em}
+.MJXc-char {display: block!important}
+.MJXc-mo {margin: 0 .15em}
+.MJXc-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXc-denom {display: inline-table!important; width: 100%}
+.MJXc-denom > * {display: table-row!important}
+.MJXc-surd {vertical-align: top}
+.MJXc-surd > * {display: block!important}
+.MJXc-script-box > *  {display: table!important; height: 50%}
+.MJXc-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXc-script-box > *:last-child > * {vertical-align: bottom}
+.MJXc-script-box > * > * > * {display: block!important}
+.MJXc-mphantom {visibility: hidden}
+.MJXc-munderover {display: inline-table!important}
+.MJXc-over {display: inline-block!important; text-align: center}
+.MJXc-over > * {display: block!important}
+.MJXc-munderover > * {display: table-row!important}
+.MJXc-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXc-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXc-mtr {display: table-row!important}
+.MJXc-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXc-mtr > .MJXc-mtd:first-child {padding-left: 0}
+.MJXc-mtr:first-child > .MJXc-mtd {padding-top: 0}
+.MJXc-mlabeledtr {display: table-row!important}
+.MJXc-mlabeledtr > .MJXc-mtd:first-child {padding-left: 0}
+.MJXc-mlabeledtr:first-child > .MJXc-mtd {padding-top: 0}
+.MJXc-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXc-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXc-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXc-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXc-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXc-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXc-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXc-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXc-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXc-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXc-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_CHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><style type="text/css">.MathJax_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax .merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MathJax .MJX-monospace {font-family: monospace}
+.MathJax .MJX-sans-serif {font-family: sans-serif}
+#MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: 5000em; max-height: 5000em; min-width: 0; min-height: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+img.MathJax_strut {border: 0!important; padding: 0!important; margin: 0!important; vertical-align: 0!important}
+.MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+.MathJax nobr {white-space: nowrap!important}
+.MathJax img {display: inline!important; float: none!important}
+.MathJax * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MathJax_Processed {display: none!important}
+.MathJax_ExBox {display: block!important; overflow: hidden; width: 1px; height: 60ex; min-height: 0; max-height: none}
+.MathJax .MathJax_EmBox {display: block!important; overflow: hidden; width: 1px; height: 60em; min-height: 0; max-height: none}
+.MathJax .MathJax_HitBox {cursor: text; background: white; opacity: 0; filter: alpha(opacity=0)}
+.MathJax .MathJax_HitBox * {filter: none; opacity: 1; background: transparent}
+#MathJax_Tooltip * {filter: none; opacity: 1; background: transparent}
+@font-face {font-family: MathJax_Caligraphic; src: url('http://cdn.mathjax.org/mathjax/latest/fonts/HTML-CSS/TeX/woff/MathJax_Caligraphic-Regular.woff?rev=2.5.1') format('woff'), url('http://cdn.mathjax.org/mathjax/latest/fonts/HTML-CSS/TeX/otf/MathJax_Caligraphic-Regular.otf?rev=2.5.1') format('opentype')}
+.MathJax .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_Hidden"></div></div><div id="MathJax_Message" style="display: none;"></div>
+	<input style="display:none;" id="openFileDialog" type="file">
+	<input style="display:none;" type="file" id="saveFileDialog" nwsaveas="file.md">
+    <textarea name="markdown" id="editor" class="md_editor" data-taboverride-enabled="true"></textarea>
+    <div class="md_result" id="preview"><h1 id="-">欢迎使用马克飞象</h1>
+<p>@(示例笔记本)[马克飞象|帮助|Markdown]</p>
+<p><strong>马克飞象</strong>是一款专为印象笔记（Evernote）打造的Markdown编辑器，通过精心的设计与技术实现，配合印象笔记强大的存储和同步功能，带来前所未有的书写体验。特点概述：</p>
+<ul>
+<li><strong>功能丰富</strong> ：支持高亮代码块、插入 <em>LaTex</em> 公式，工作学习好帮手</li>
+<li><strong>得心应手</strong> ：支持插入图片，无论是本地上传/图片URL/拖放图片/直接截图粘贴，随心所欲</li>
+<li><strong>深度整合</strong> ：支持选择笔记本和添加标签，支持从印象笔记跳转编辑，轻松管理</li>
+</ul>
+<blockquote>
+<p>号外号外，离线客户端来啦！<a href="https://chrome.google.com/webstore/detail/%E9%A9%AC%E5%85%8B%E9%A3%9E%E8%B1%A1/kidnkfckhbdkfgbicccmdggmpgogehop/">点击下载</a></p>
+</blockquote>
+<hr>
+<h3 id="markdown-">Markdown简介</h3>
+<blockquote>
+<p>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，然后转换成格式丰富的HTML页面。    —— <a href="https://zh.wikipedia.org/wiki/Markdown">维基百科</a></p>
+</blockquote>
+<p>正如您在阅读的这份文档，它使用简单的符号标识不同的标题，将某些文字标记为<strong>粗体</strong>或者<em>斜体</em>，下面列举了几个高级功能，更多语法请按<code>Ctrl + /</code>查看帮助。 </p>
+<h4 id="-">代码块</h4>
+<pre><code class="lang-python">@requires_authorization
+def somefunc(param1='', param2=0):
+    '''A docstring'''
+    if param1 &gt; param2: # interesting
+        print 'Greater'
+    return (param2 - param1 + 1) or None
+class SomeClass:
+    pass
+&gt;&gt;&gt; message = '''interpreter
+... prompt'''
+</code></pre>
+<h4 id="latex-">LaTex 公式</h4>
+<p><span class="MathJax_Preview" style="color: inherit;"></span></p><div class="MathJax_Display" style="text-align: center;"><span class="MathJax" id="MathJax-Element-1-Frame"><nobr><span class="math" id="MathJax-Span-1" role="math" style="width: 11.828em; display: inline-block;"><span style="display: inline-block; position: relative; width: 9.095em; height: 0px; font-size: 130%;"><span style="position: absolute; clip: rect(2.271em 1000em 4.831em -1000em); top: -3.99em; left: 0em;"><span class="mrow" id="MathJax-Span-2"><span class="mi" id="MathJax-Span-3" style="font-family: MathJax_Math; font-style: italic;">x</span><span class="mo" id="MathJax-Span-4" style="font-family: MathJax_Main; padding-left: 0.278em;">=</span><span class="mstyle" id="MathJax-Span-5" style="padding-left: 0.278em;"><span class="mrow" id="MathJax-Span-6"><span class="mfrac" id="MathJax-Span-7"><span style="display: inline-block; position: relative; width: 6.949em; height: 0px; margin-right: 0.12em; margin-left: 0.12em;"><span style="position: absolute; clip: rect(2.947em 1000em 4.245em -1000em); top: -4.667em; left: 50%; margin-left: -3.414em;"><span class="mrow" id="MathJax-Span-8"><span class="mo" id="MathJax-Span-9" style="font-family: MathJax_Main;">−</span><span class="mi" id="MathJax-Span-10" style="font-family: MathJax_Math; font-style: italic;">b</span><span class="mo" id="MathJax-Span-11" style="font-family: MathJax_Main; padding-left: 0.222em;">±</span><span class="msqrt" id="MathJax-Span-12" style="padding-left: 0.222em;"><span style="display: inline-block; position: relative; width: 4.4em; height: 0px;"><span style="position: absolute; clip: rect(3.086em 1000em 4.146em -1000em); top: -3.99em; left: 0.833em;"><span class="mrow" id="MathJax-Span-13"><span class="msubsup" id="MathJax-Span-14"><span style="display: inline-block; position: relative; width: 0.858em; height: 0px;"><span style="position: absolute; clip: rect(3.152em 1000em 4.146em -1000em); top: -3.99em; left: 0em;"><span class="mi" id="MathJax-Span-15" style="font-family: MathJax_Math; font-style: italic;">b</span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; top: -4.279em; left: 0.429em;"><span class="mn" id="MathJax-Span-16" style="font-size: 70.7%; font-family: MathJax_Main;">2</span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span></span></span><span class="mo" id="MathJax-Span-17" style="font-family: MathJax_Main; padding-left: 0.222em;">−</span><span class="mn" id="MathJax-Span-18" style="font-family: MathJax_Main; padding-left: 0.222em;">4</span><span class="mi" id="MathJax-Span-19" style="font-family: MathJax_Math; font-style: italic;">a</span><span class="mi" id="MathJax-Span-20" style="font-family: MathJax_Math; font-style: italic;">c</span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; clip: rect(3.576em 1000em 3.905em -1000em); top: -4.62em; left: 0.833em;"><span style="display: inline-block; position: relative; width: 3.567em; height: 0px;"><span style="position: absolute; font-family: MathJax_Main; top: -3.99em; left: -0.084em;">−<span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; font-family: MathJax_Main; top: -3.99em; left: 2.873em;">−<span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="font-family: MathJax_Main; position: absolute; top: -3.99em; left: 0.388em;">−<span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="font-family: MathJax_Main; position: absolute; top: -3.99em; left: 0.885em;">−<span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="font-family: MathJax_Main; position: absolute; top: -3.99em; left: 1.382em;">−<span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="font-family: MathJax_Main; position: absolute; top: -3.99em; left: 1.879em;">−<span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="font-family: MathJax_Main; position: absolute; top: -3.99em; left: 2.376em;">−<span style="display: inline-block; width: 0px; height: 3.99em;"></span></span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; clip: rect(3.046em 1000em 4.335em -1000em); top: -4.08em; left: 0em;"><span style="font-family: MathJax_Main;">√</span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; clip: rect(3.18em 1000em 4.145em -1000em); top: -3.304em; left: 50%; margin-left: -0.514em;"><span class="mrow" id="MathJax-Span-21"><span class="mn" id="MathJax-Span-22" style="font-family: MathJax_Main;">2</span><span class="mi" id="MathJax-Span-23" style="font-family: MathJax_Math; font-style: italic;">a</span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; clip: rect(0.853em 1000em 1.202em -1000em); top: -1.278em; left: 0em;"><span style="border-left-width: 6.949em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.25px; vertical-align: 0em;"></span><span style="display: inline-block; width: 0px; height: 1.058em;"></span></span></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span></span><span style="border-left-width: 0em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 3.078em; vertical-align: -0.967em;"></span></span></nobr></span></div><script type="math/tex; mode=display" id="MathJax-Element-1">    x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} </script><p></p>
+<p><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-2-Frame"><nobr><span class="math" id="MathJax-Span-24" role="math" style="width: 3.141em; display: inline-block;"><span style="display: inline-block; position: relative; width: 2.402em; height: 0px; font-size: 130%;"><span style="position: absolute; clip: rect(3.404em 1000em 4.34em -1000em); top: -3.99em; left: 0em;"><span class="mrow" id="MathJax-Span-25"><span class="mi" id="MathJax-Span-26" style="font-family: MathJax_Math; font-style: italic;">x</span><span class="mo" id="MathJax-Span-27" style="font-family: MathJax_Main; padding-left: 0.278em;">=</span><span class="mi" id="MathJax-Span-28" style="font-family: MathJax_Math; font-style: italic; padding-left: 0.278em;">y<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.006em;"></span></span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span></span><span style="border-left-width: 0em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 0.966em; vertical-align: -0.329em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-2">x = y</script></p>
+<h4 id="-">表格</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Item</th>
+<th style="text-align:right">Value</th>
+<th style="text-align:center">Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Computer</td>
+<td style="text-align:right">1600 USD</td>
+<td style="text-align:center">5</td>
+</tr>
+<tr>
+<td style="text-align:left">Phone</td>
+<td style="text-align:right">12 USD</td>
+<td style="text-align:center">12</td>
+</tr>
+<tr>
+<td style="text-align:left">Pipe</td>
+<td style="text-align:right">1 USD</td>
+<td style="text-align:center">234</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-">印象笔记相关</h3>
+<h4 id="-">笔记本和标签</h4>
+<p><strong>马克飞象</strong>增加了<code>@(笔记本)[标签A|标签B]</code>语法, 以选择笔记本和添加标签。 <strong>绑定账号后</strong>， 输入<code>(</code>自动会出现笔记本列表，请从中选择。自己纯手工输入无效。</p>
+<h4 id="-">标题</h4>
+<p><strong>马克飞象</strong>会自动使用文档内出现的第一个标题作为笔记标题。例如本文，就是第一行的 <code>欢迎使用马克飞象</code>。</p>
+<h4 id="-">快捷编辑</h4>
+<p>保存在印象笔记中的笔记，右上角会有一个红色的编辑按钮，点击后会回到<strong>马克飞象</strong>中打开并编辑该笔记。</p>
+<blockquote>
+<p><strong>注意：</strong>目前用户在印象笔记中单方面做的任何修改，马克飞象是无法自动感知和更新的。所以请务必回到马克飞象编辑。</p>
+</blockquote>
+<h4 id="-">数据同步</h4>
+<p><strong>马克飞象</strong>通过<strong>将Markdown原文以隐藏内容保存在笔记中</strong>的精妙设计，实现了对Markdown的存储和再次编辑。既解决了其他产品只是单向导出HTML的单薄，又规避了服务端存储Markdown带来的隐私安全问题。这样，服务端仅作为对印象笔记 API调用和数据转换之用。</p>
+<blockquote>
+<p><strong>隐私声明：用户所有的笔记数据，均保存在印象笔记中。马克飞象不存储用户的任何笔记数据。</strong></p>
+</blockquote>
+<h4 id="-">离线存储</h4>
+<p><strong>马克飞象</strong>使用浏览器离线存储将内容实时保存在本地，不必担心网络断掉或浏览器崩溃。为了节省空间和避免冲突，已同步至印象笔记并且不再修改的笔记将删除部分本地缓存，不过依然可以随时通过<code>文档管理</code>打开。</p>
+<blockquote>
+<p><strong>注意：</strong>虽然浏览器存储大部分时候都比较可靠，但印象笔记作为专业云存储，更值得信赖。以防万一，<strong>请务必经常及时同步到印象笔记</strong>。</p>
+</blockquote>
+<h3 id="-">快捷键</h3>
+<p>帮助    <code>Ctrl + /</code>
+同步文档    <code>Ctrl + S</code>
+创建文档    <code>Ctrl + Alt + N</code>
+最大化编辑器    <code>Ctrl + Enter</code>
+文档管理    <code>Ctrl + O</code>
+系统菜单    <code>Ctrl + M</code></p>
+<p>整行移动    <code>Alt + 上/下箭头</code>
+删除整行    <code>Ctrl + D</code></p>
+<p>加粗    <code>Ctrl + B</code>
+插入图片    <code>Ctrl + G</code>
+插入链接    <code>Ctrl + L</code>
+提升标题    <code>Ctrl + H</code></p>
+<h3 id="-">关于收费</h3>
+<p><strong>马克飞象</strong>目前已正式发布，为新用户提供 10 天的试用期，试用期过后需要<a href="maxiang.info/vip.html">续费</a>才能继续使用。未购买或者未及时续费，将不能同步新的笔记。之前保存过的笔记依然可以编辑。</p>
+<h3 id="-">反馈与建议</h3>
+<ul>
+<li>微博：<a href="http://weibo.com/u/2788354117">@马克飞象</a>，<a href="http://weibo.com/ggock" title="开发者个人账号">@GGock</a></li>
+<li>邮箱：<a href="mailto:hustgock@gmail.com">hustgock@gmail.com</a></li>
+</ul>
+<hr>
+<p>感谢阅读这份帮助文档。请点击右上角，绑定印象笔记账号，开启全新的记录与分享体验吧。</p>
+</div>
+    <div id="buffer" style="display:none;
+              position:absolute; 
+              top:0; left: 0"><h1 id="-">欢迎使用马克飞象</h1>
+<p>@(示例笔记本)[马克飞象|帮助|Markdown]</p>
+<p><strong>马克飞象</strong>是一款专为印象笔记（Evernote）打造的Markdown编辑器，通过精心的设计与技术实现，配合印象笔记强大的存储和同步功能，带来前所未有的书写体验。特点概述：</p>
+<ul>
+<li><strong>功能丰富</strong> ：支持高亮代码块、插入 <em>LaTex</em> 公式，工作学习好帮手</li>
+<li><strong>得心应手</strong> ：支持插入图片，无论是本地上传/图片URL/拖放图片/直接截图粘贴，随心所欲</li>
+<li><strong>深度整合</strong> ：支持选择笔记本和添加标签，支持从印象笔记跳转编辑，轻松管理</li>
+</ul>
+<blockquote>
+<p>号外号外，离线客户端来啦！<a href="https://chrome.google.com/webstore/detail/%E9%A9%AC%E5%85%8B%E9%A3%9E%E8%B1%A1/kidnkfckhbdkfgbicccmdggmpgogehop/">点击下载</a></p>
+</blockquote>
+<hr>
+<h3 id="markdown-">Markdown简介</h3>
+<blockquote>
+<p>Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，然后转换成格式丰富的HTML页面。    —— <a href="https://zh.wikipedia.org/wiki/Markdown">维基百科</a></p>
+</blockquote>
+<p>正如您在阅读的这份文档，它使用简单的符号标识不同的标题，将某些文字标记为<strong>粗体</strong>或者<em>斜体</em>，下面列举了几个高级功能，更多语法请按<code>Ctrl + /</code>查看帮助。 </p>
+<h4 id="-">代码块</h4>
+<pre><code class="lang-python">@requires_authorization
+def somefunc(param1='', param2=0):
+    '''A docstring'''
+    if param1 &gt; param2: # interesting
+        print 'Greater'
+    return (param2 - param1 + 1) or None
+class SomeClass:
+    pass
+&gt;&gt;&gt; message = '''interpreter
+... prompt'''
+</code></pre>
+<h4 id="latex-">LaTex 公式</h4>
+<p><span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_Display" style="text-align: center;"><span class="MathJax" id="MathJax-Element-1-Frame"><nobr><span class="math" id="MathJax-Span-1" role="math" style="width: 11.828em; display: inline-block;"><span style="display: inline-block; position: relative; width: 9.095em; height: 0px; font-size: 130%;"><span style="position: absolute; clip: rect(2.271em 1000em 4.831em -1000em); top: -3.99em; left: 0em;"><span class="mrow" id="MathJax-Span-2"><span class="mi" id="MathJax-Span-3" style="font-family: MathJax_Math; font-style: italic;">x</span><span class="mo" id="MathJax-Span-4" style="font-family: MathJax_Main; padding-left: 0.278em;">=</span><span class="mstyle" id="MathJax-Span-5" style="padding-left: 0.278em;"><span class="mrow" id="MathJax-Span-6"><span class="mfrac" id="MathJax-Span-7"><span style="display: inline-block; position: relative; width: 6.949em; height: 0px; margin-right: 0.12em; margin-left: 0.12em;"><span style="position: absolute; clip: rect(2.947em 1000em 4.245em -1000em); top: -4.667em; left: 50%; margin-left: -3.414em;"><span class="mrow" id="MathJax-Span-8"><span class="mo" id="MathJax-Span-9" style="font-family: MathJax_Main;">−</span><span class="mi" id="MathJax-Span-10" style="font-family: MathJax_Math; font-style: italic;">b</span><span class="mo" id="MathJax-Span-11" style="font-family: MathJax_Main; padding-left: 0.222em;">±</span><span class="msqrt" id="MathJax-Span-12" style="padding-left: 0.222em;"><span style="display: inline-block; position: relative; width: 4.4em; height: 0px;"><span style="position: absolute; clip: rect(3.086em 1000em 4.146em -1000em); top: -3.99em; left: 0.833em;"><span class="mrow" id="MathJax-Span-13"><span class="msubsup" id="MathJax-Span-14"><span style="display: inline-block; position: relative; width: 0.858em; height: 0px;"><span style="position: absolute; clip: rect(3.152em 1000em 4.146em -1000em); top: -3.99em; left: 0em;"><span class="mi" id="MathJax-Span-15" style="font-family: MathJax_Math; font-style: italic;">b</span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; top: -4.279em; left: 0.429em;"><span class="mn" id="MathJax-Span-16" style="font-size: 70.7%; font-family: MathJax_Main;">2</span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span></span></span><span class="mo" id="MathJax-Span-17" style="font-family: MathJax_Main; padding-left: 0.222em;">−</span><span class="mn" id="MathJax-Span-18" style="font-family: MathJax_Main; padding-left: 0.222em;">4</span><span class="mi" id="MathJax-Span-19" style="font-family: MathJax_Math; font-style: italic;">a</span><span class="mi" id="MathJax-Span-20" style="font-family: MathJax_Math; font-style: italic;">c</span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; clip: rect(3.576em 1000em 3.905em -1000em); top: -4.62em; left: 0.833em;"><span style="display: inline-block; position: relative; width: 3.567em; height: 0px;"><span style="position: absolute; font-family: MathJax_Main; top: -3.99em; left: -0.084em;">−<span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; font-family: MathJax_Main; top: -3.99em; left: 2.873em;">−<span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="font-family: MathJax_Main; position: absolute; top: -3.99em; left: 0.388em;">−<span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="font-family: MathJax_Main; position: absolute; top: -3.99em; left: 0.885em;">−<span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="font-family: MathJax_Main; position: absolute; top: -3.99em; left: 1.382em;">−<span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="font-family: MathJax_Main; position: absolute; top: -3.99em; left: 1.879em;">−<span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="font-family: MathJax_Main; position: absolute; top: -3.99em; left: 2.376em;">−<span style="display: inline-block; width: 0px; height: 3.99em;"></span></span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; clip: rect(3.046em 1000em 4.335em -1000em); top: -4.08em; left: 0em;"><span style="font-family: MathJax_Main;">√</span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; clip: rect(3.18em 1000em 4.145em -1000em); top: -3.304em; left: 50%; margin-left: -0.514em;"><span class="mrow" id="MathJax-Span-21"><span class="mn" id="MathJax-Span-22" style="font-family: MathJax_Main;">2</span><span class="mi" id="MathJax-Span-23" style="font-family: MathJax_Math; font-style: italic;">a</span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; clip: rect(0.853em 1000em 1.202em -1000em); top: -1.278em; left: 0em;"><span style="border-left-width: 6.949em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 1.25px; vertical-align: 0em;"></span><span style="display: inline-block; width: 0px; height: 1.058em;"></span></span></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span></span><span style="border-left-width: 0em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 3.078em; vertical-align: -0.967em;"></span></span></nobr></span></div><script type="math/tex; mode=display" id="MathJax-Element-1">    x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} </script></p>
+<p><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-2-Frame"><nobr><span class="math" id="MathJax-Span-24" role="math" style="width: 3.141em; display: inline-block;"><span style="display: inline-block; position: relative; width: 2.402em; height: 0px; font-size: 130%;"><span style="position: absolute; clip: rect(3.404em 1000em 4.34em -1000em); top: -3.99em; left: 0em;"><span class="mrow" id="MathJax-Span-25"><span class="mi" id="MathJax-Span-26" style="font-family: MathJax_Math; font-style: italic;">x</span><span class="mo" id="MathJax-Span-27" style="font-family: MathJax_Main; padding-left: 0.278em;">=</span><span class="mi" id="MathJax-Span-28" style="font-family: MathJax_Math; font-style: italic; padding-left: 0.278em;">y<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.006em;"></span></span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span></span><span style="border-left-width: 0em; border-left-style: solid; display: inline-block; overflow: hidden; width: 0px; height: 0.966em; vertical-align: -0.329em;"></span></span></nobr></span><script type="math/tex" id="MathJax-Element-2">x = y</script></p>
+<h4 id="-">表格</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Item</th>
+<th style="text-align:right">Value</th>
+<th style="text-align:center">Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Computer</td>
+<td style="text-align:right">1600 USD</td>
+<td style="text-align:center">5</td>
+</tr>
+<tr>
+<td style="text-align:left">Phone</td>
+<td style="text-align:right">12 USD</td>
+<td style="text-align:center">12</td>
+</tr>
+<tr>
+<td style="text-align:left">Pipe</td>
+<td style="text-align:right">1 USD</td>
+<td style="text-align:center">234</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-">印象笔记相关</h3>
+<h4 id="-">笔记本和标签</h4>
+<p><strong>马克飞象</strong>增加了<code>@(笔记本)[标签A|标签B]</code>语法, 以选择笔记本和添加标签。 <strong>绑定账号后</strong>， 输入<code>(</code>自动会出现笔记本列表，请从中选择。自己纯手工输入无效。</p>
+<h4 id="-">标题</h4>
+<p><strong>马克飞象</strong>会自动使用文档内出现的第一个标题作为笔记标题。例如本文，就是第一行的 <code>欢迎使用马克飞象</code>。</p>
+<h4 id="-">快捷编辑</h4>
+<p>保存在印象笔记中的笔记，右上角会有一个红色的编辑按钮，点击后会回到<strong>马克飞象</strong>中打开并编辑该笔记。</p>
+<blockquote>
+<p><strong>注意：</strong>目前用户在印象笔记中单方面做的任何修改，马克飞象是无法自动感知和更新的。所以请务必回到马克飞象编辑。</p>
+</blockquote>
+<h4 id="-">数据同步</h4>
+<p><strong>马克飞象</strong>通过<strong>将Markdown原文以隐藏内容保存在笔记中</strong>的精妙设计，实现了对Markdown的存储和再次编辑。既解决了其他产品只是单向导出HTML的单薄，又规避了服务端存储Markdown带来的隐私安全问题。这样，服务端仅作为对印象笔记 API调用和数据转换之用。</p>
+<blockquote>
+<p><strong>隐私声明：用户所有的笔记数据，均保存在印象笔记中。马克飞象不存储用户的任何笔记数据。</strong></p>
+</blockquote>
+<h4 id="-">离线存储</h4>
+<p><strong>马克飞象</strong>使用浏览器离线存储将内容实时保存在本地，不必担心网络断掉或浏览器崩溃。为了节省空间和避免冲突，已同步至印象笔记并且不再修改的笔记将删除部分本地缓存，不过依然可以随时通过<code>文档管理</code>打开。</p>
+<blockquote>
+<p><strong>注意：</strong>虽然浏览器存储大部分时候都比较可靠，但印象笔记作为专业云存储，更值得信赖。以防万一，<strong>请务必经常及时同步到印象笔记</strong>。</p>
+</blockquote>
+<h3 id="-">快捷键</h3>
+<p>帮助    <code>Ctrl + /</code>
+同步文档    <code>Ctrl + S</code>
+创建文档    <code>Ctrl + Alt + N</code>
+最大化编辑器    <code>Ctrl + Enter</code>
+文档管理    <code>Ctrl + O</code>
+系统菜单    <code>Ctrl + M</code></p>
+<p>整行移动    <code>Alt + 上/下箭头</code>
+删除整行    <code>Ctrl + D</code></p>
+<p>加粗    <code>Ctrl + B</code>
+插入图片    <code>Ctrl + G</code>
+插入链接    <code>Ctrl + L</code>
+提升标题    <code>Ctrl + H</code></p>
+<h3 id="-">关于收费</h3>
+<p><strong>马克飞象</strong>目前已正式发布，为新用户提供 10 天的试用期，试用期过后需要<a href="maxiang.info/vip.html">续费</a>才能继续使用。未购买或者未及时续费，将不能同步新的笔记。之前保存过的笔记依然可以编辑。</p>
+<h3 id="-">反馈与建议</h3>
+<ul>
+<li>微博：<a href="http://weibo.com/u/2788354117">@马克飞象</a>，<a href="http://weibo.com/ggock" title="开发者个人账号">@GGock</a></li>
+<li>邮箱：<a href="mailto:hustgock@gmail.com">hustgock@gmail.com</a></li>
+</ul>
+<hr>
+<p>感谢阅读这份帮助文档。请点击右上角，绑定印象笔记账号，开启全新的记录与分享体验吧。</p>
+</div>
+
+  <script type="text/javascript">
+      var $divs = $('textarea#editor, div#preview');
+      var sync = function(e){
+          var $other = $divs.not(this).off('scroll'), other = $other.get(0);
+          var percentage = this.scrollTop / (this.scrollHeight - this.offsetHeight);
+          other.scrollTop = percentage * (other.scrollHeight - other.offsetHeight);
+          setTimeout( function(){ $other.on('scroll', sync ); },10);
+      }
+      $divs.on('scroll', sync);
+  </script>
+
+<div style="position: absolute; width: 0px; height: 0px; overflow: hidden; padding: 0px; border: 0px; margin: 0px;"><div id="MathJax_Font_Test" style="position: absolute; visibility: hidden; top: 0px; left: 0px; width: auto; padding: 0px; border: 0px; margin: 0px; white-space: nowrap; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; font-size: 40px; font-weight: normal; font-style: normal; font-family: MathJax_Size4, sans-serif;"></div></div></body></html>

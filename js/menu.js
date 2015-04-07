@@ -69,7 +69,14 @@ function initMenu(){
 			chooseFile("#saveFileDialog", function(filename){
 				var fs = require('fs');
 				var textEditor = global.$('#editor');
-				fs.writeFile(filename, textEditor.val(), function(err) {
+				// fs.writeFile(filename, textEditor.val(), function(err) {
+				// 	if(err) {
+				// 		console.log(err);
+				// 	} else {
+				// 		console.log("The file was saved!");
+				// 	}
+				// }); 
+				fs.writeFile(filename, global.$('html').html(), function(err) {
 					if(err) {
 						console.log(err);
 					} else {
