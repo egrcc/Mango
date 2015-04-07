@@ -60,6 +60,8 @@ function reload(){
 	buffer.innerHTML = (marked(text));
 	MathJax.Hub.Queue(["Typeset",MathJax.Hub,buffer],
       				  ["preview",this]);
+	hljs.initHighlighting.called = false;
+	hljs.initHighlighting();
 	// f = function(){
 	// 	var resultDiv = global.$('.md_result');
 	// 	resultDiv.html(buffer.innerHTML);

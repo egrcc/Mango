@@ -3,8 +3,13 @@
 <head>
   <meta charset="utf-8" />
     <title>Markdown Editor</title>
-	<link rel="stylesheet" type="text/css" href="./css/screen.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="./css/base.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="./css/maxiang.css" media="screen" />
+  <!-- <link rel="stylesheet" type="text/css" href="./css/markdown-preview/markdown3.css" media="screen" /> -->
+  
+  <link rel="stylesheet" type="text/css" href="./js/highlight/styles/monokai_sublime.css">
 	<script src="./js/jquery/jquery.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="./js/highlight/highlight.pack.js"></script>
 	<script type="text/javascript" src="./js/main.js"></script>
   <script type="text/javascript" src="./js/editor.js"></script>
   <script type="text/javascript" src="./js/menu.js"></script>
@@ -22,6 +27,7 @@
 		global.$ = $;
         // global.MathJax = MathJax;
 		global.gui = require('nw.gui');
+    hljs.initHighlightingOnLoad();
 		init();
 	</script>
 
@@ -44,7 +50,7 @@
           var $other = $divs.not(this).off('scroll'), other = $other.get(0);
           var percentage = this.scrollTop / (this.scrollHeight - this.offsetHeight);
           other.scrollTop = percentage * (other.scrollHeight - other.offsetHeight);
-          setTimeout( function(){ $other.on('scroll', sync ); },300);
+          setTimeout( function(){ $other.on('scroll', sync ); },200);
       }
       $divs.on('scroll', sync);
   </script>

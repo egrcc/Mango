@@ -8,6 +8,7 @@
   "single-instance": false,
   "window": {
 	"toolbar": false,
+	"frame": false, 
 	"show": true,
 	"icon": "./img/Mango1.png"
   },
