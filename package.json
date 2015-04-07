@@ -1,0 +1,25 @@
+{
+  "name": "Mango",
+  "version": "0.1.0",
+  "description": "Markdown Editor",
+  "main": "index.html",
+  "author": "zhaolujun1994@gmail.com",
+  "license": "GPL3",
+  "single-instance": false,
+  "window": {
+	"toolbar": false,
+	"show": true,
+	"icon": "./img/icon.png"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/egrcc/Mango.git"
+  },
+  "dependencies": {
+		"marked": "^0.3.3",
+		"mathjax": "~2.5.0",
+		"MathJax-node": "~0.3.0",
+		"nimble": "*",
+		"remarkable": "~1.6.0"
+  }
+}
