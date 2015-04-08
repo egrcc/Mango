@@ -19,14 +19,15 @@ function initMenu(){
 	fileMenu.append(new global.gui.MenuItem({
 		label: 'Open',
 		click: function() {
-			save();
-			chooseFile("#openFileDialog", function(filename){
-				loadFile(filename);
-				isSaved = true;
-				isExist = true;
-				currentFileName = filename;
-
+			checkSaved(function() {
+				chooseFile("#openFileDialog", function(filename){
+					loadFile(filename);
+					// isSaved = true;
+					isExist = true;
+					currentFileName = filename;
+				});
 			});
+			
 		}
 	}));
 	fileMenu.append(new global.gui.MenuItem({
@@ -196,26 +197,13 @@ function initMenu(){
 		label: 'Mango Help',
 		click: function(){
 
-			var flow = require('nimble');
-			flow.series([
-			  function (callback) {
-			    save();
-			    console.log("1");
-			    callback();
-			  },
-			  function (callback) {
-			    loadFile("./doc/Mango-Help.md");
-			    console.log("2");
-			    callback();
-			  },
-			  function (callback) {
-		    	isSaved = true;
+			checkSaved(function() {
+				loadFile("./doc/Mango-Help.md");
+				// isSaved = true;
 				isExist = true;
 				currentFileName = "./doc/Mango-Help.md";
-				console.log("3");
-				callback();
-			  }
-			]);
+			});
+
 			
 		}
 	}));
@@ -224,41 +212,77 @@ function initMenu(){
 		label: 'Markdown Syntax Help',
 		click: function(){
 
-			var flow = require('nimble');
-			flow.series([
-			  function (callback) {
-			    save();
-			    console.log("1");
-			    callback();
-			  },
-			  function (callback) {
-			    loadFile("./doc/Markdown-Syntax-Help.md");
-			    console.log("2");
-			    callback();
-			  },
-			  function (callback) {
-		    	isSaved = true;
+			checkSaved(function() {
+				loadFile("./doc/Markdown-Syntax-Help.md");
+				// isSaved = true;
 				isExist = true;
 				currentFileName = "./doc/Markdown-Syntax-Help.md";
-				console.log("3");
-				console.log(isSaved.toString());
-				callback();
-			  }
-			]);
-			// save();
-			// loadFile("./doc/Markdown-Syntax-Help.md");
-			// isSaved = true;
-			// isExist = true;
-			// currentFileName = "./doc/Markdown-Syntax-Help.md";
+				
+			});
+			
 		}
 	}));
 
 	helpMenu.append(new global.gui.MenuItem({
 		label: 'Check for Update',
 		click: function(){
-			bootbox.alert("You already have the latest version.", function() {
-			  
-			});
+			var request = require('request');
+			request('http://xunmiweb.sinaapp.com/version', function (error, response, body) {
+			  if (!error && response.statusCode == 200) {
+			    console.log(body); // Show the HTML for the Google homepage. 
+			    JSON.parse(body, function(k, v) {
+				    if (k === 'Mango_version') {
+				   	    console.log(v); 
+				   	    if (v === "0.1.0") {
+				   	    	bootbox.dialog({
+							  message: "You already have the latest version.",
+							  title: "Check for Update",
+							  buttons: {
+							    main: {
+							      label: "OK",
+							      className: "btn-primary",
+							      callback: function() {
+
+							      }
+							    }
+							  }
+							});
+				   	    } else {
+				   	    	bootbox.dialog({
+							  message: "The latest version is " + v + ", download it now?",
+							  title: "Check for Update",
+							  buttons: {
+							    success: {
+							      label: "NO",
+							      className: "btn-success",
+							      callback: function() {
+							        
+							      }
+							    },
+							    // danger: {
+							    //   label: "Danger!",
+							    //   className: "btn-danger",
+							    //   callback: function() {
+							    //     Example.show("uh oh, look out!");
+							    //   }
+							    // },
+							    main: {
+							      label: "YES",
+							      className: "btn-primary",
+							      callback: function() {
+							      	global.gui.Shell.openExternal("https://github.com/egrcc/Mango");
+							      }
+							    }
+							  }
+							});
+				   	    }
+					} 
+				}); 
+			
+			  }
+			})
+			
+			
 		}
 	}));
 	helpMenu.append(new global.gui.MenuItem({
@@ -297,6 +321,18 @@ function initMenu(){
 	menubar.append(new global.gui.MenuItem({ label: 'Help', submenu: helpMenu}));
 	win.menu = menubar;
 	win.on("close", close);
+	// win.on('new-win-policy', function (frame, url, policy) {
+	//     global.gui.Shell.openExternal(url);
+	//     policy.ignore();
+	// });
+	// global.$(".md_result").on('click', 'a', function (e) {
+
+ //        e.preventDefault();
+        
+ //        // Open URL with default browser.
+ //        global.gui.Shell.openExternal(e.target.href);
+
+ //    });
 };
 
 function save() {
@@ -370,6 +406,39 @@ function close() {
 	} else {
 		global.gui.App.quit();
 	}	
+}
+
+function checkSaved(callback) {
+
+	if (!isSaved) {
+
+		bootbox.dialog({
+		  message: "Do you want to save the file, then open another file?",
+		  // title: "Custom title",
+		  buttons: {
+		  	
+		    success: {
+		      label: "Save",
+		      className: "btn-success",
+		      callback: function() {
+		        save();
+		        callback();
+		      }
+		    },
+		    danger: {
+		      label: "Don't Save",
+		      className: "btn-danger",
+		      callback: function() {
+		        // global.gui.App.quit();
+		        callback();
+		      }
+		    }
+		    
+		  }
+		});
+	} else {
+		callback();
+	}
 }
 
 

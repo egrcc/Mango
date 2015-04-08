@@ -23,6 +23,7 @@
 		"jsreport":"~0.3.0",
 		"marked": "^0.3.3",
 		"bootbox": "~4.4.0",
+		"request": "~2.55.0",
 		"mathjax": "~2.5.0",
 		"bootstrap": "3.3.0",
 		"phantom-html2pdf": "~0.1.3",

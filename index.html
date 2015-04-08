@@ -65,6 +65,15 @@
           setTimeout( function(){ $other.on('scroll', sync ); },200);
       }
       $divs.on('scroll', sync);
+
+      $(".md_result").on('click', 'a', function (e) {
+
+          e.preventDefault();
+          console.log("asd");
+          // Open URL with default browser.
+          global.gui.Shell.openExternal(e.target.href);
+
+      });
   </script>
   <script type="text/javascript" src="./node_modules/bootbox/bootbox.min.js"></script>
   
