@@ -66,7 +66,12 @@
       }
       $divs.on('scroll', sync);
 
-      $(".md_result").on('click', 'a', function (e) {
+      // var win = global.gui.Window.get();
+      // win.on('new-win-policy', function (frame, url, policy) {
+      //     global.gui.Shell.openExternal(url);
+      //     policy.ignore();
+      // });
+      $("html").on('click', 'a', function (e) {
 
           e.preventDefault();
           console.log("asd");
