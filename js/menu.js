@@ -14,7 +14,9 @@ function initMenu(){
 		click: function() {
 			isExist = false;
 			loadText("");
-		}
+		},
+		key: "n",
+  		modifiers: "ctrl"
 	}));
 	fileMenu.append(new global.gui.MenuItem({
 		label: 'Open',
@@ -28,11 +30,19 @@ function initMenu(){
 				});
 			});
 			
-		}
+		},
+		key: "o",
+  		modifiers: "ctrl"
+	}));
+
+	fileMenu.append(new global.gui.MenuItem({
+		type: "separator"
 	}));
 	fileMenu.append(new global.gui.MenuItem({
 		label: 'Save',
-		click: save
+		click: save,
+		key: "s",
+  		modifiers: "ctrl"
 	}));
 
 	fileMenu.append(new global.gui.MenuItem({
@@ -57,7 +67,12 @@ function initMenu(){
 				// 	}
 				// }); 
 			});
-		}
+		},
+		key: "s",
+  		modifiers: "shift-ctrl"
+	}));
+	fileMenu.append(new global.gui.MenuItem({
+		type: "separator"
 	}));
 
 	var exportMenu = new global.gui.Menu();
@@ -86,7 +101,9 @@ function initMenu(){
 				    result.toFile(pdffilename, function() {});
 				});
 			});
-		}
+		},
+		key: "e",
+  		modifiers: "shift-ctrl"
 	}));
 
 	exportMenu.append(new global.gui.MenuItem({
@@ -109,15 +126,19 @@ function initMenu(){
 				}); 
 			});
 
-		}
+		},
+		key: "e",
+  		modifiers: "ctrl"
 	}));
 
 	
 
 
 	fileMenu.append(new global.gui.MenuItem({
-		label: 'Exit',
-		click: close
+		label: 'Quit',
+		click: close,
+		key: "q",
+  		modifiers: "ctrl"
 	}));
 
 	var modeMenu = new global.gui.Menu();
@@ -137,7 +158,9 @@ function initMenu(){
 						"width":"49.5%",
 						"margin-left":"0px"});
 			global.$('.background').css({"background-color":"#ffffff"});
-		}
+		},
+		key: "1",
+  		modifiers: "shift-ctrl"
 	}));
 	modeMenu.append(new global.gui.MenuItem({
 		label: 'Viewer:Editor',
@@ -154,7 +177,12 @@ function initMenu(){
 						"width":"50.2%",
 						"margin-left":"0px"});
 			global.$('.background').css({"background-color":"#272822"});
-		}
+		},
+		key: "2",
+  		modifiers: "shift-ctrl"
+	}));
+	modeMenu.append(new global.gui.MenuItem({
+		type: "separator"
 	}));
 	modeMenu.append(new global.gui.MenuItem({
 		label: 'Editor',
@@ -168,27 +196,86 @@ function initMenu(){
 						"margin-left":"5px"});
 			Viewer.css({"display":"none"});
 			global.$('.background').css({"background-color":"#ffffff"});
-		}
+		},
+		key: "3",
+  		modifiers: "shift-ctrl"
 	}));
 	modeMenu.append(new global.gui.MenuItem({
 		label: 'Viewer',
-		click: changeModeToViewer
+		click: changeModeToViewer,
+		key: "4",
+  		modifiers: "shift-ctrl"
 	}));
 
 	var editMenu = new global.gui.Menu();
 
 	editMenu.append(new global.gui.MenuItem({
-		label: 'Redo',
+		label: 'Undo',
 		click: function(){
-
-		}
+			global.window.document.execCommand("undo");
+		},
+		key: "z",
+  		modifiers: "ctrl"
 	}));
 
 	editMenu.append(new global.gui.MenuItem({
-		label: 'Undo',
+		label: 'Redo',
 		click: function(){
-			
-		}
+			global.window.document.execCommand("redo");
+		},
+		key: "z",
+  		modifiers: "shift-ctrl"
+	}));
+
+	editMenu.append(new global.gui.MenuItem({
+		type: "separator"
+	}));
+
+
+	editMenu.append(new global.gui.MenuItem({
+		label: 'Cut',
+		click: function(){
+			global.window.document.execCommand("cut");
+		},
+		key: "x",
+  		modifiers: "ctrl"
+	}));
+	editMenu.append(new global.gui.MenuItem({
+		label: 'Copy',
+		click: function(){
+			global.window.document.execCommand("copy");
+		},
+		key: "c",
+  		modifiers: "ctrl"
+	}));
+	editMenu.append(new global.gui.MenuItem({
+		label: 'Paste',
+		click: function(){
+			global.window.document.execCommand("paste");
+		},
+		key: "v",
+  		modifiers: "ctrl"
+	}));
+	editMenu.append(new global.gui.MenuItem({
+		type: "separator"
+	}));
+
+	editMenu.append(new global.gui.MenuItem({
+		label: 'Delete',
+		click: function(){
+			global.window.document.execCommand("delete");
+		},
+		key: "d",
+  		modifiers: "ctrl"
+	}));
+
+	editMenu.append(new global.gui.MenuItem({
+		label: 'Select All',
+		click: function(){
+			global.window.document.execCommand("selectAll");
+		},
+		key: "a",
+  		modifiers: "ctrl"
 	}));
 
 	var helpMenu = new global.gui.Menu();
@@ -221,6 +308,10 @@ function initMenu(){
 			});
 			
 		}
+	}));
+
+	helpMenu.append(new global.gui.MenuItem({
+		type: "separator"
 	}));
 
 	helpMenu.append(new global.gui.MenuItem({
