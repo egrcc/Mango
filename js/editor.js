@@ -62,6 +62,7 @@ function reload(){
       				  ["preview",this]);
 	hljs.initHighlighting.called = false;
 	hljs.initHighlighting();
+	isSaved = false;
 	// f = function(){
 	// 	var resultDiv = global.$('.md_result');
 	// 	resultDiv.html(buffer.innerHTML);
