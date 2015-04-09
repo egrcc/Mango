@@ -4,13 +4,36 @@ var isExist = false;
 var currentFileName;
 var isSaved = true;
 
+var fileMenuArray = ["New                           Ctrl+N",
+				     "Open                         Ctrl+O",
+				     "Save                           Ctrl+S",
+				     "Save As...   Shift+Ctrl+S",
+				     "Quit                          Ctrl+Q"];
+
+var editMenuArray = ["Undo                  Ctrl+Z",
+				     "Redo     Shift+Ctrl+Z",
+				     "Cut                      Ctrl+X",
+				     "Copy                   Ctrl+C",
+				     "Paste                 Ctrl+V",
+				     "Delete               Ctrl+D",
+				     "Select All         Ctrl+A"];
+
+var exportMenuArray = ["PDF                      Ctrl+E",
+					   "HTML    Shift+Ctrl+E"];
+
+var modeMenuArray = ["Editor:Viewer   Shift+Ctrl+1",
+					 "Viewer:Editor   Shift+Ctrl+2",
+					 "Editor                    Shift+Ctrl+3",
+					 "Viewer                  Shift+Ctrl+4"];					   
+
 function initMenu(){
 	var win = global.gui.Window.get();
 	var menubar = new global.gui.Menu({ type: 'menubar' });
 	// var editor = require("./editor.js");
 	var fileMenu = new global.gui.Menu();
 	fileMenu.append(new global.gui.MenuItem({
-		label: 'New',
+		// label: 'New',
+		label: fileMenuArray[0],
 		click: function() {
 			isExist = false;
 			loadText("");
@@ -19,7 +42,8 @@ function initMenu(){
   		modifiers: "ctrl"
 	}));
 	fileMenu.append(new global.gui.MenuItem({
-		label: 'Open',
+		// label: 'Open',
+		label: fileMenuArray[1],
 		click: function() {
 			checkSaved(function() {
 				chooseFile("#openFileDialog", function(filename){
@@ -39,14 +63,16 @@ function initMenu(){
 		type: "separator"
 	}));
 	fileMenu.append(new global.gui.MenuItem({
-		label: 'Save',
+		// label: 'Save',
+		label: fileMenuArray[2],
 		click: save,
 		key: "s",
   		modifiers: "ctrl"
 	}));
 
 	fileMenu.append(new global.gui.MenuItem({
-		label: 'Save As...',
+		// label: 'Save As...',
+		label: fileMenuArray[3],
 		click: function() {
 			// global.$('#saveFileDialog').attr({"nwsaveas":"file.md"});
 			chooseFile("#saveasFileDialog", function(filename){
@@ -78,7 +104,8 @@ function initMenu(){
 	var exportMenu = new global.gui.Menu();
 
 	exportMenu.append(new global.gui.MenuItem({
-		label: 'PDF',
+		// label: 'PDF',
+		label: exportMenuArray[0],
 		click: function() {
 			// global.gui.App.quit();
 			
@@ -103,11 +130,12 @@ function initMenu(){
 			});
 		},
 		key: "e",
-  		modifiers: "shift-ctrl"
+  		modifiers: "ctrl"
 	}));
 
 	exportMenu.append(new global.gui.MenuItem({
-		label: 'HTML',
+		// label: 'HTML',
+		label: exportMenuArray[1],
 		click: function() {
 			// global.gui.App.quit();
 			console.log("html");
@@ -128,14 +156,15 @@ function initMenu(){
 
 		},
 		key: "e",
-  		modifiers: "ctrl"
+  		modifiers: "shift-ctrl"
 	}));
 
 	
 
 
 	fileMenu.append(new global.gui.MenuItem({
-		label: 'Quit',
+		// label: 'Quit',
+		label: fileMenuArray[4],
 		click: close,
 		key: "q",
   		modifiers: "ctrl"
@@ -144,18 +173,19 @@ function initMenu(){
 	var modeMenu = new global.gui.Menu();
 
 	modeMenu.append(new global.gui.MenuItem({
-		label: 'Editor:Viewer',
+		// label: 'Editor:Viewer',
+		label: modeMenuArray[0],
 		click: function() {
 			// global.gui.App.quit();
 			var Editor = global.$('.md_editor');
 			var Viewer = global.$('.md_result');
 			Editor.css({"float":"left",
 						"display":"inline",
-						"width":"49.8%",
+						"width":"49.7%",
 						"margin-left":"5px"});
 			Viewer.css({"float":"right",
 						"display":"inline",
-						"width":"49.5%",
+						"width":"49.4%",
 						"margin-left":"0px"});
 			global.$('.background').css({"background-color":"#ffffff"});
 		},
@@ -163,18 +193,19 @@ function initMenu(){
   		modifiers: "shift-ctrl"
 	}));
 	modeMenu.append(new global.gui.MenuItem({
-		label: 'Viewer:Editor',
+		// label: 'Viewer:Editor',
+		label: modeMenuArray[1],
 		click: function() {
 			// global.gui.App.quit();
 			var Editor = global.$('.md_editor');
 			var Viewer = global.$('.md_result');
 			Editor.css({"float":"right",
 						"display":"inline",
-						"width":"49.8%",
+						"width":"49.7%",
 						"margin-left":"0px"});
 			Viewer.css({"float":"left",
 						"display":"inline",
-						"width":"50.2%",
+						"width":"50.1%",
 						"margin-left":"0px"});
 			global.$('.background').css({"background-color":"#272822"});
 		},
@@ -185,7 +216,8 @@ function initMenu(){
 		type: "separator"
 	}));
 	modeMenu.append(new global.gui.MenuItem({
-		label: 'Editor',
+		// label: 'Editor',
+		label: modeMenuArray[2],
 		click: function() {
 			// global.gui.App.quit();
 			var Editor = global.$('.md_editor');
@@ -201,7 +233,8 @@ function initMenu(){
   		modifiers: "shift-ctrl"
 	}));
 	modeMenu.append(new global.gui.MenuItem({
-		label: 'Viewer',
+		// label: 'Viewer',
+		label: modeMenuArray[3],
 		click: changeModeToViewer,
 		key: "4",
   		modifiers: "shift-ctrl"
@@ -210,7 +243,8 @@ function initMenu(){
 	var editMenu = new global.gui.Menu();
 
 	editMenu.append(new global.gui.MenuItem({
-		label: 'Undo',
+		// label: 'Undo',
+		label: editMenuArray[0],
 		click: function(){
 			global.window.document.execCommand("undo");
 		},
@@ -219,7 +253,8 @@ function initMenu(){
 	}));
 
 	editMenu.append(new global.gui.MenuItem({
-		label: 'Redo',
+		// label: 'Redo',
+		label: editMenuArray[1],
 		click: function(){
 			global.window.document.execCommand("redo");
 		},
@@ -233,7 +268,8 @@ function initMenu(){
 
 
 	editMenu.append(new global.gui.MenuItem({
-		label: 'Cut',
+		// label: 'Cut',
+		label: editMenuArray[2],
 		click: function(){
 			global.window.document.execCommand("cut");
 		},
@@ -241,7 +277,8 @@ function initMenu(){
   		modifiers: "ctrl"
 	}));
 	editMenu.append(new global.gui.MenuItem({
-		label: 'Copy',
+		// label: 'Copy',
+		label: editMenuArray[3],
 		click: function(){
 			global.window.document.execCommand("copy");
 		},
@@ -249,7 +286,8 @@ function initMenu(){
   		modifiers: "ctrl"
 	}));
 	editMenu.append(new global.gui.MenuItem({
-		label: 'Paste',
+		// label: 'Paste',
+		label: editMenuArray[4],
 		click: function(){
 			global.window.document.execCommand("paste");
 		},
@@ -261,7 +299,8 @@ function initMenu(){
 	}));
 
 	editMenu.append(new global.gui.MenuItem({
-		label: 'Delete',
+		// label: 'Delete',
+		label: editMenuArray[5],
 		click: function(){
 			global.window.document.execCommand("delete");
 		},
@@ -270,7 +309,8 @@ function initMenu(){
 	}));
 
 	editMenu.append(new global.gui.MenuItem({
-		label: 'Select All',
+		// label: 'Select All',
+		label: editMenuArray[6],
 		click: function(){
 			global.window.document.execCommand("selectAll");
 		},
@@ -376,6 +416,22 @@ function initMenu(){
 			
 		}
 	}));
+
+	helpMenu.append(new global.gui.MenuItem({
+		label: 'Acknowlegements',
+		click: function(){
+
+			checkSaved(function() {
+				loadFile("./doc/Acknowlegements.md");
+				// isSaved = true;
+				isExist = true;
+				currentFileName = "./doc/Acknowlegements.md";
+				
+			});
+			
+		}
+	}));
+
 	helpMenu.append(new global.gui.MenuItem({
 		label: 'About',
 		click: function(){
@@ -390,7 +446,7 @@ function initMenu(){
 					        <br><br>\
 					        <p><strong>Mango Editor for Markdown</strong></p>\
 					        <p>0.1.0</p>\
-					        <a href="https://github.com/egrcc/Mango">Mango in github</a>\
+					        <a href="https://github.com/egrcc/Mango">Mango in Github</a>\
 					        <br><br> \
 					        <p>Copyright &copy; 2015 egrcc. All Rights Reserved </p>\
 					        <a href="mailto:zhaolujun1994@gmail.com">&lt;zhaolujun1994@gmail.com&gt;</a>\

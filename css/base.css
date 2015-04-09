@@ -16,7 +16,7 @@ a{
 
 .md_editor{
 	float:left;
-	width:49.8%;
+	width:49.7%;
 	height:100%;
 	resize:none;
 	padding: 10px;
@@ -35,7 +35,7 @@ a{
 .md_result{
 	font-size:107%;
 	float:right;
-	width:49.5%;
+	width:49.4%;
 	box-sizing:border-box;
 	background-color: #ffffff;
 	padding:10px 10px 13px 10px;
