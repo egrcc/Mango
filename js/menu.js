@@ -3,6 +3,7 @@
 var isExist = false;
 var currentFileName;
 var isSaved = true;
+var isHide = false;
 
 var fileMenuArray = ["New                           Ctrl+N",
 				     "Open                         Ctrl+O",
@@ -21,10 +22,14 @@ var editMenuArray = ["Undo                  Ctrl+Z",
 var exportMenuArray = ["PDF                      Ctrl+E",
 					   "HTML    Shift+Ctrl+E"];
 
-var modeMenuArray = ["Editor:Viewer   Shift+Ctrl+1",
-					 "Viewer:Editor   Shift+Ctrl+2",
-					 "Editor                    Shift+Ctrl+3",
-					 "Viewer                  Shift+Ctrl+4"];					   
+var modeMenuArray = ["Editor:Viewer    Shift+Ctrl+1",
+					 "Viewer:Editor    Shift+Ctrl+2",
+					 "Editor                     Shift+Ctrl+3",
+					 "Viewer                   Shift+Ctrl+4",
+					 "Hide Toolbar                   Ctrl+H",
+					 "Show Toolbar    Shift+Ctrl+H",
+					 "Fullscreen                                F11",
+					 "Exit Fullscreen                      F12"];					   
 
 function initMenu(){
 	var win = global.gui.Window.get();
@@ -159,9 +164,7 @@ function initMenu(){
 		key: "2",
   		modifiers: "shift-ctrl"
 	}));
-	modeMenu.append(new global.gui.MenuItem({
-		type: "separator"
-	}));
+	
 	modeMenu.append(new global.gui.MenuItem({
 		// label: 'Editor',
 		label: modeMenuArray[2],
@@ -185,6 +188,40 @@ function initMenu(){
 		click: changeModeToViewer,
 		key: "4",
   		modifiers: "shift-ctrl"
+	}));
+	modeMenu.append(new global.gui.MenuItem({
+		type: "separator"
+	}));
+
+	modeMenu.append(new global.gui.MenuItem({
+		// label: 'Hide Toolbar',
+		label: modeMenuArray[4],
+		click: hideToolbar,
+		key: "h",
+  		modifiers: "ctrl"
+	}));
+	modeMenu.append(new global.gui.MenuItem({
+		// label: 'Show Toolbar',
+		label: modeMenuArray[5],
+		click: showToolbar,
+		key: "h",
+  		modifiers: "shift-ctrl"
+	}));
+
+	modeMenu.append(new global.gui.MenuItem({
+		// label: 'Fullscreen',
+		label: modeMenuArray[6],
+		click: changeModeToFullscreen,
+		key: "F11"
+  		// modifiers: "shift-ctrl"
+	}));
+
+	modeMenu.append(new global.gui.MenuItem({
+		// label: 'Exit Fullscreen',
+		label: modeMenuArray[7],
+		click: exitFullscreen,
+		key: "F12"
+  		// modifiers: "shift-ctrl"
 	}));
 
 	var editMenu = new global.gui.Menu();
@@ -583,41 +620,99 @@ function previewMode() {
 
 function exportToPDF() {
 	console.log("pdf");
-	changeModeToViewer();
-	// global.$('#saveFileDialog').attr({"nwsaveas":"file.pdf"});
-	chooseFile("#pdfFileDialog", function(pdffilename){
+	if (!isHide) {
+		hideToolbar();
+		changeModeToViewer();
+		// global.$('#saveFileDialog').attr({"nwsaveas":"file.pdf"});
+		chooseFile("#pdfFileDialog", function(pdffilename){
 
-		var fs = require('fs');
-		var pdf = require('phantom-html2pdf');
-		var html = global.window.document.documentElement.outerHTML;
-		var options = {
-						"html" : html,
-						"css" :	"./js/highlight/styles/monokai_sublime_with_maxiang.css"
-						// "js" : "./js/highlight/highlight.pack.js"
-					  };
-		console.log("pdf print");
-		pdf.convert(options, function(result) {
-		    result.toFile(pdffilename, function() {});
+			var fs = require('fs');
+			var pdf = require('phantom-html2pdf');
+			var html = global.window.document.documentElement.outerHTML;
+			var options = {
+							"html" : html,
+							"css" :	"./js/highlight/styles/monokai_sublime_with_maxiang.css"
+							// "js" : "./js/highlight/highlight.pack.js"
+						  };
+			console.log("pdf print");
+			showToolbar();
+			pdf.convert(options, function(result) {
+			    result.toFile(pdffilename, function() {});
+			    
+			});
 		});
-	});
+	} else {
+		changeModeToViewer();
+		// global.$('#saveFileDialog').attr({"nwsaveas":"file.pdf"});
+		chooseFile("#pdfFileDialog", function(pdffilename){
+
+			var fs = require('fs');
+			var pdf = require('phantom-html2pdf');
+			var html = global.window.document.documentElement.outerHTML;
+			var options = {
+							"html" : html,
+							"css" :	"./js/highlight/styles/monokai_sublime_with_maxiang.css"
+							// "js" : "./js/highlight/highlight.pack.js"
+						  };
+			console.log("pdf print");
+			pdf.convert(options, function(result) {
+			    result.toFile(pdffilename, function() {});
+			    // showToolbar();
+			});
+		});
+	}
+	
 }
 
 function exportToHTML() {
 	console.log("html");
-	changeModeToViewer();
-	// global.$('#saveFileDialog').attr({"nwsaveas":"file.html"});
-	console.log("html2");
-	chooseFile("#htmlFileDialog", function(filename){
-		console.log("html print");
-		var fs = require('fs');
-		fs.writeFile(filename, global.window.document.documentElement.outerHTML, function(err) {
-			if(err) {
-				console.log(err);
-			} else {
-				console.log("The file was saved!");
-			}
-		}); 
-	});
+	if (!isHide) {
+		hideToolbar();
+		changeModeToViewer();
+		// global.$('#saveFileDialog').attr({"nwsaveas":"file.html"});
+		console.log("html2");
+		chooseFile("#htmlFileDialog", function(filename){
+			console.log("html print");
+			var fs = require('fs');
+			// showToolbar();
+			fs.writeFile(filename, global.window.document.documentElement.outerHTML, function(err) {
+				if(err) {
+					console.log(err);
+				} else {
+					console.log("The file was saved!");
+					showToolbar();
+				}
+			}); 
+		});
+	} else {
+		changeModeToViewer();
+		// global.$('#saveFileDialog').attr({"nwsaveas":"file.html"});
+		console.log("html2");
+		chooseFile("#htmlFileDialog", function(filename){
+			console.log("html print");
+			var fs = require('fs');
+			fs.writeFile(filename, global.window.document.documentElement.outerHTML, function(err) {
+				if(err) {
+					console.log(err);
+				} else {
+					console.log("The file was saved!");
+				}
+			}); 
+		});
+	}
+	
+}
+
+function hideToolbar() {
+	isHide = true;
+	global.$(".toolbar").css({"display": "none"});
+	global.$(".background").css({"top": "0"});
+}
+
+function showToolbar() {
+	isHide = false;
+	global.$(".toolbar").css({"display": "inline"});
+	global.$(".background").css({"top": "42px"});
 }
 
 function changeModeToViewer() {
@@ -628,4 +723,14 @@ function changeModeToViewer() {
 				"display":"inline"});
 	Editor.css({"display":"none"});
 	global.$('.background').css({"background-color":"#ffffff"});
+}
+
+function changeModeToFullscreen() {
+	var win = global.gui.Window.get();
+    win.enterKioskMode();
+}
+
+function exitFullscreen() {
+	var win = global.gui.Window.get();
+    win.leaveKioskMode();
 }
