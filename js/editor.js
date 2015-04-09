@@ -1,5 +1,55 @@
 
+// function preload(){
+// 	var marked = require("marked");
+// 	marked.setOptions({
+// 	renderer: new marked.Renderer(),
+// 		gfm: true,
+// 		tables: true,
+// 		breaks: false,
+// 		pedantic: false,
+// 		sanitize: false,
+// 		smartLists: true,
+// 		smartypants: false
+// 	});
+// 	var resultDiv = global.$('.md_result');
+// 	var buffer = global.window.document.getElementById("buffer");
+// 	var textEditor = global.$('#editor');
+// 	var text = textEditor.val();
+// 	buffer.innerHTML = (marked(text));
+// 	MathJax.Hub.Queue(["Typeset",MathJax.Hub,buffer],
+//       				  ["preview",this]);
+// 	hljs.initHighlighting.called = false;
+// 	hljs.initHighlighting();
+// }
+
 function preload(){
+	
+	var resultDiv = global.$('.md_result');
+	var buffer = global.window.document.getElementById("buffer");
+	var textEditor = global.$('#editor');
+	var text = textEditor.val();
+	text = escape(text);
+	buffer.innerHTML = (text);
+	MathJax.Hub.Queue(["Typeset",MathJax.Hub,buffer],
+      				  ["preview",this]);
+	
+}
+
+function reload(){
+	preload();
+	isSaved = false;
+	
+};
+
+// function preview(){
+// 	setTimeout(function(){
+// 		var resultDiv = global.$('.md_result');
+// 		resultDiv.html(buffer.innerHTML);
+// 	}, 300);
+	
+// }
+
+function preview(){
 	var marked = require("marked");
 	marked.setOptions({
 	renderer: new marked.Renderer(),
@@ -11,39 +61,26 @@ function preload(){
 		smartLists: true,
 		smartypants: false
 	});
-	var resultDiv = global.$('.md_result');
-	var buffer = global.window.document.getElementById("buffer");
-	var textEditor = global.$('#editor');
-	var text = textEditor.val();
-	buffer.innerHTML = (marked(text));
-	MathJax.Hub.Queue(["Typeset",MathJax.Hub,buffer],
-      				  ["preview",this]);
-	hljs.initHighlighting.called = false;
-	hljs.initHighlighting();
-}
-
-function reload(){
-	preload();
-	isSaved = false;
-	// f = function(){
-	// 	var resultDiv = global.$('.md_result');
-	// 	resultDiv.html(buffer.innerHTML);
-	// }
-
-	// MathJax.Hub.Queue(["Typeset",MathJax.Hub,buffer]);
-	// setTimeout(f, 1000);
-	// MathJax.Hub.Queue(f); 
-	// console.log(buffer.html());
-	// resultDiv.html(marked(text));
-};
-
-function preview(){
 	setTimeout(function(){
 		var resultDiv = global.$('.md_result');
-		resultDiv.html(buffer.innerHTML);
+		var text = buffer.innerHTML;
+		text = text.replace(/&gt;/mg, '>');
+		resultDiv.html(marked(text));
+		hljs.initHighlighting.called = false;
+		hljs.initHighlighting();
 	}, 300);
 	
 }
+
+function escape(html, encode) {
+    return html
+      .replace(!encode ? /&(?!#?\w+;)/g : /&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+     .replace(/'/g, '&#39;');
+}
+
 
 function loadText(text){
 	var textEditor = global.$('#editor');
