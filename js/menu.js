@@ -34,27 +34,14 @@ function initMenu(){
 	fileMenu.append(new global.gui.MenuItem({
 		// label: 'New',
 		label: fileMenuArray[0],
-		click: function() {
-			isExist = false;
-			loadText("");
-		},
+		click: newFile,
 		key: "n",
   		modifiers: "ctrl"
 	}));
 	fileMenu.append(new global.gui.MenuItem({
 		// label: 'Open',
 		label: fileMenuArray[1],
-		click: function() {
-			checkSaved(function() {
-				chooseFile("#openFileDialog", function(filename){
-					loadFile(filename);
-					// isSaved = true;
-					isExist = true;
-					currentFileName = filename;
-				});
-			});
-			
-		},
+		click: openFile,
 		key: "o",
   		modifiers: "ctrl"
 	}));
@@ -106,29 +93,7 @@ function initMenu(){
 	exportMenu.append(new global.gui.MenuItem({
 		// label: 'PDF',
 		label: exportMenuArray[0],
-		click: function() {
-			// global.gui.App.quit();
-			
-
-			console.log("pdf");
-			changeModeToViewer();
-			// global.$('#saveFileDialog').attr({"nwsaveas":"file.pdf"});
-			chooseFile("#pdfFileDialog", function(pdffilename){
-
-				var fs = require('fs');
-				var pdf = require('phantom-html2pdf');
-				var html = global.window.document.documentElement.outerHTML;
-				var options = {
-								"html" : html,
-								"css" :	"./js/highlight/styles/monokai_sublime_with_maxiang.css"
-								// "js" : "./js/highlight/highlight.pack.js"
-							  };
-				console.log("pdf print");
-				pdf.convert(options, function(result) {
-				    result.toFile(pdffilename, function() {});
-				});
-			});
-		},
+		click: exportToPDF,
 		key: "e",
   		modifiers: "ctrl"
 	}));
@@ -136,25 +101,7 @@ function initMenu(){
 	exportMenu.append(new global.gui.MenuItem({
 		// label: 'HTML',
 		label: exportMenuArray[1],
-		click: function() {
-			// global.gui.App.quit();
-			console.log("html");
-			changeModeToViewer();
-			// global.$('#saveFileDialog').attr({"nwsaveas":"file.html"});
-			console.log("html2");
-			chooseFile("#htmlFileDialog", function(filename){
-				console.log("html print");
-				var fs = require('fs');
-				fs.writeFile(filename, global.window.document.documentElement.outerHTML, function(err) {
-					if(err) {
-						console.log(err);
-					} else {
-						console.log("The file was saved!");
-					}
-				}); 
-			});
-
-		},
+		click: exportToHTML,
 		key: "e",
   		modifiers: "shift-ctrl"
 	}));
@@ -588,6 +535,90 @@ function checkSaved(callback) {
 	}
 }
 
+function newFile() {
+	isExist = false;
+	loadText("");
+}
+
+function openFile() {
+	checkSaved(function() {
+		chooseFile("#openFileDialog", function(filename){
+			loadFile(filename);
+			// isSaved = true;
+			isExist = true;
+			currentFileName = filename;
+		});
+	});
+}
+
+function saveFile() {
+	save();
+}
+
+function undo() {
+	global.window.document.execCommand("undo");
+}
+
+function redo() {
+	global.window.document.execCommand("redo");
+}
+
+function editMode() {
+	var Editor = global.$('.md_editor');
+	var Viewer = global.$('.md_result');
+	Editor.css({"float":"left",
+				"display":"inline",
+				"width":"49.7%",
+				"margin-left":"5px"});
+	Viewer.css({"float":"right",
+				"display":"inline",
+				"width":"49.4%",
+				"margin-left":"0px"});
+	global.$('.background').css({"background-color":"#ffffff"});
+}
+
+function previewMode() {
+	changeModeToViewer();
+}
+
+function exportToPDF() {
+	console.log("pdf");
+	changeModeToViewer();
+	// global.$('#saveFileDialog').attr({"nwsaveas":"file.pdf"});
+	chooseFile("#pdfFileDialog", function(pdffilename){
+
+		var fs = require('fs');
+		var pdf = require('phantom-html2pdf');
+		var html = global.window.document.documentElement.outerHTML;
+		var options = {
+						"html" : html,
+						"css" :	"./js/highlight/styles/monokai_sublime_with_maxiang.css"
+						// "js" : "./js/highlight/highlight.pack.js"
+					  };
+		console.log("pdf print");
+		pdf.convert(options, function(result) {
+		    result.toFile(pdffilename, function() {});
+		});
+	});
+}
+
+function exportToHTML() {
+	console.log("html");
+	changeModeToViewer();
+	// global.$('#saveFileDialog').attr({"nwsaveas":"file.html"});
+	console.log("html2");
+	chooseFile("#htmlFileDialog", function(filename){
+		console.log("html print");
+		var fs = require('fs');
+		fs.writeFile(filename, global.window.document.documentElement.outerHTML, function(err) {
+			if(err) {
+				console.log(err);
+			} else {
+				console.log("The file was saved!");
+			}
+		}); 
+	});
+}
 
 function changeModeToViewer() {
 	var Editor = global.$('.md_editor');

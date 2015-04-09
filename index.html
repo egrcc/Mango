@@ -39,6 +39,36 @@
 
 </head>
 <body>
+  <div class="toolbars">
+    <div class="image-background1" title=" Create a new file " style="margin-left: 5px;">
+      <input type="image" src="./img/mango_new_42.png" onclick="newFile()"/>
+    </div>
+    <div class="image-background1" title=" Open a file " style="margin-left: 8px;">
+      <input type="image" src="./img/mango_open_42.png" onclick="openFile()"/>
+    </div>
+    <div class="image-background1" title=" Save the current file " style="margin-left: 10px;">
+      <input type="image" src="./img/mango_save_42.png" onclick="saveFile()"/>
+    </div>
+    <div class="image-background1" title=" Undo the last action " style="margin-left: 28px;">
+      <input type="image" src="./img/mango_undo_42.png" onclick="undo()"/>
+    </div>
+    <div class="image-background1" title=" Redo the last undone action " style="margin-left: 10px;">
+      <input type="image" src="./img/mango_redo_42.png" onclick="redo()"/>
+    </div>
+    <div class="image-background1" title=" Edit mode " style="margin-left: 28px;">
+      <input type="image" src="./img/mango_edit_42.png" onclick="editMode()"/>
+    </div>
+    <div class="image-background1" title=" Preview mode " style="margin-left: 10px;">
+      <input type="image" src="./img/mango_preview_42.png" onclick="previewMode()"/>
+    </div>
+    <div class="image-background3" title=" Export to PDF ">
+      <input type="image" src="./img/mango_pdf_42.png" onclick="exportToPDF()"/>
+    </div>
+    <div class="image-background3" title=" Export to HTML ">
+      <input type="image" src="./img/mango_html_42.png" onclick="exportToHTML()"/>
+    </div>
+    <!-- <button style="background: url(./img/Mango1_48.png)"  /> -->
+  </div>
 	<input style="display:none;" id="openFileDialog" type="file" />
 	<input style="display:none;" type="file"  id="saveFileDialog" nwsaveas="file.md" />
   <input style="display:none;" type="file"  id="saveasFileDialog" nwsaveas="" />

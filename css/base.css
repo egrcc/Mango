@@ -10,8 +10,51 @@ a{
 
 .background{
 	width:100%;
-	height:100%;
+	/*height:auto;*/
+	position: absolute;
+	top: 42px;
+	bottom: 5px;
 	background-color: #ffffff;
+}
+
+.toolbars{
+	width:100%;
+	height:42px;
+	background-color: #fff;
+}
+
+.image-background1{
+	width: 42px;
+	height: 42px;
+	/*margin-left: 5px; */
+	float: left;
+}
+
+.image-background1:hover{ 
+	background-color: #e0e0e0;
+}
+
+/*.image-background2{
+	width: 42px;
+	height: 42px;
+	margin-left: 10px; 
+	float: left;
+}
+
+.image-background2:hover{ 
+	background-color: #e0e0e0;
+}*/
+
+.image-background3{
+	width: 42px;
+	height: 42px;
+	margin-right: 10px; 
+	float: right;
+}
+
+.image-background3:hover{ 
+	background-color: #e0e0e0;
+	
 }
 
 .md_editor{
