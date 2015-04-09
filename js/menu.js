@@ -320,6 +320,21 @@ function initMenu(){
 	}));
 
 	helpMenu.append(new global.gui.MenuItem({
+		label: 'Mango Shortcut Help',
+		click: function(){
+
+			checkSaved(function() {
+				loadFile("./doc/Mango-Shortcut-Help.md");
+				// isSaved = true;
+				isExist = true;
+				currentFileName = "./doc/Mango-Shortcut-Help.md";
+			});
+
+			
+		}
+	}));
+
+	helpMenu.append(new global.gui.MenuItem({
 		label: 'Markdown Syntax Help',
 		click: function(){
 
