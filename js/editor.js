@@ -32,11 +32,16 @@ function preload(){
 	buffer.innerHTML = (text);
 	MathJax.Hub.Queue(["Typeset",MathJax.Hub,buffer],
       				  ["preview",this]);
+
+	
 	
 }
 
 function reload(){
 	preload();
+	if (currentFileName != null) {
+		global.$("title").html(currentFileName + '*');
+	}
 	isSaved = false;
 	
 };

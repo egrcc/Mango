@@ -313,6 +313,7 @@ function initMenu(){
 				// isSaved = true;
 				isExist = true;
 				currentFileName = "./doc/Mango-Help.md";
+				global.$("title").html("Mango-Help.md");
 			});
 
 			
@@ -328,6 +329,7 @@ function initMenu(){
 				// isSaved = true;
 				isExist = true;
 				currentFileName = "./doc/Mango-Shortcut-Help.md";
+				global.$("title").html("Mango-Shortcut-Help.md");
 			});
 
 			
@@ -343,6 +345,7 @@ function initMenu(){
 				// isSaved = true;
 				isExist = true;
 				currentFileName = "./doc/Markdown-Syntax-Help.md";
+				global.$("title").html("Markdown-Syntax-Help.md");
 				
 			});
 			
@@ -425,6 +428,7 @@ function initMenu(){
 				// isSaved = true;
 				isExist = true;
 				currentFileName = "./doc/Acknowlegements.md";
+				global.$("title").html("Acknowlegements.md");
 				
 			});
 			
@@ -485,6 +489,7 @@ function save() {
 	if (isExist) {
 		var fs = require('fs');
 		var textEditor = global.$('#editor');
+		global.$("title").html(currentFileName);
 		fs.writeFile(currentFileName, textEditor.val(), function(err) {
 			if(err) {
 				console.log(err);
@@ -503,6 +508,7 @@ function save() {
 				} else {
 					isSaved = true;
 					currentFileName = filename;
+					global.$("title").html(currentFileName);
 					isExist = true;
 					console.log("The file was saved!");
 				}
@@ -590,6 +596,8 @@ function checkSaved(callback) {
 function newFile() {
 	isExist = false;
 	loadText("");
+	currentFileName = null;
+	global.$("title").html("Mango Editor for Markdown");
 }
 
 function openFile() {
@@ -599,6 +607,7 @@ function openFile() {
 			// isSaved = true;
 			isExist = true;
 			currentFileName = filename;
+			global.$("title").html(currentFileName);
 		});
 	});
 }

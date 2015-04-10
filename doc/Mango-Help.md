@@ -1,99 +1,83 @@
-# 欢迎使用马克飞象
 
-@(示例笔记本)[马克飞象|帮助|Markdown]
+# Mango Editor for Markdown
 
-**马克飞象**是一款专为印象笔记（Evernote）打造的Markdown编辑器，通过精心的设计与技术实现，配合印象笔记强大的存储和同步功能，带来前所未有的书写体验。特点概述：
- 
-- **功能丰富** ：支持高亮代码块、插入 *LaTex* 公式，工作学习好帮手
-- **得心应手** ：支持插入图片，无论是本地上传/图片URL/拖放图片/直接截图粘贴，随心所欲
-- **深度整合** ：支持选择笔记本和添加标签，支持从印象笔记跳转编辑，轻松管理
+![Mango](./img/Mango1_256.png)
 
-> 号外号外，离线客户端来啦！[点击下载](https://chrome.google.com/webstore/detail/%E9%A9%AC%E5%85%8B%E9%A3%9E%E8%B1%A1/kidnkfckhbdkfgbicccmdggmpgogehop/)
+## What is Mango?
 
--------------------
+**Mango** is a Markdown editor designed for Linux, also supports Windows and Mac OSX. It's not only supports Markdown, but also extends Markdown syntax with some nice features to help people conveniently write **mathematical formula** and **code**.
 
-### Markdown简介
+**Mango** is a open source project in [Github](https://github.com/egrcc/Mango), and uses many other open sources projects. For detailed information, please see **Acknowlegements** in help menu.   
 
-> Markdown 是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档，然后转换成格式丰富的HTML页面。    —— [维基百科](https://zh.wikipedia.org/wiki/Markdown)
 
-正如您在阅读的这份文档，它使用简单的符号标识不同的标题，将某些文字标记为**粗体**或者*斜体*，下面列举了几个高级功能，更多语法请按`Ctrl + /`查看帮助。 
+## What is Markdown?
 
-#### 代码块
+> Markdown is a markup language with plain text formatting syntax designed so that it can be converted to HTML and many other formats using a tool by the same name.    —— [Wikipedia](http://en.wikipedia.org/wiki/Markdown)
+
+**Markdown** was created by **John Gruber**, with substantial contributions from **Aaron Swartz** in 2004 with the goal of enabling people "to write using an easy-to-read, easy-to-write plain text format, and optionally convert it to structurally valid XHTML (or HTML)”.
+
+For detailed Markdown syntax, please see **Markdown Syntax Help** in help menu.
+
+## Main Features
+
+#### 1. Cross Platform Support
+
+**Mango** is powered by [NW.js](http://nwjs.io/), so it supports all three major operating systems: **Windows**, **Mac OS X**, and **Linux**. 
+
+#### 2 . Live Preview with Scroll Sync
+
+**Mango**’s Scroll Sync accurately binds the scrollbars of the editor panel and the preview panel to ensure that you always keep an eye on the output while writing.
+
+#### 3 . Mathematics Expression
+
+With **MathJax** support you can render beautiful **LaTeX** expressions. For inline formulas, enclose the formula in $\$...\$$. For displayed formulas, use $\$\$...\$\$$. For example:
+
+**Pythagorean theorem**: $a^2 + b^2 = c^2$.
+
+**Normal distribution**:
+$$f(x, \mu, \sigma) = \frac{1}{\sigma \sqrt{2\pi} } e^{ -\frac{(x-\mu)^2}{2\sigma^2} } $$
+
+**Maxwell's Equations**:
+
+$$
+\begin{gather}
+\nabla \cdot \mathbf{D} = \rho_\text{f}\tag{1} \\
+\nabla \cdot \mathbf{B} = 0\tag{2} \\
+\nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}} {\partial t}\tag{3}  \\
+\nabla \times \mathbf{H} = \mathbf{J}_\text{f} + \frac{\partial \mathbf{D}} {\partial t}\tag{4}
+\end{gather}
+$$
+    
+    
+                            
+#### 4. Syntax Highlighting 
+
+You can write code like below, that will highlighted in the Live Preview:
+
+
 ``` python
-@requires_authorization
-def somefunc(param1='', param2=0):
-    '''A docstnnnnnring'''
-    if param1 > param2: # interesting
-        print 'Greater'
-    return (param2 - param1 + 1) or None
-class SomeClass:
-    pass
->>> message = '''interpreter
-... prompt'''
+# from zhihu-python(https://github.com/egrcc/zhihu-python)
+
+from zhihu import Question
+
+url = "http://www.zhihu.com/question/24269892"
+question = Question(url)
+answers = question.get_all_answers()
+for answer in answers:
+    answer.to_txt()
+    answer.to_md()
 ```
 
-#### LaTex 公式
-$$	x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
+#### 5. Export to Various Formats 
 
-$x = y$
-
-#### 表格
-| Item      |    Value | Qty  |
-| :-------- | --------:| :--: |
-| Computer  | 1600 USD |  5   |
-| Phone     |   12 USD |  12  |
-| Pipe      |    1 USD | 234  |
-
-### 印象笔记相关
-
-#### 笔记本和标签
-**马克飞象**增加了`@(笔记本)[标签A|标签B]`语法, 以选择笔记本和添加标签。 **绑定账号后**， 输入`(`自动会出现笔记本列表，请从中选择。自己纯手工输入无效。
-
-#### 标题
-**马克飞象**会自动使用文档内出现的第一个标题作为笔记标题。例如本文，就是第一行的 `欢迎使用马克飞象`。
-
-#### 快捷编辑
-保存在印象笔记中的笔记，右上角会有一个红色的编辑按钮，点击后会回到**马克飞象**中打开并编辑该笔记。
->**注意：**目前用户在印象笔记中单方面做的任何修改，马克飞象是无法自动感知和更新的。所以请务必回到马克飞象编辑。
-
-#### 数据同步
-**马克飞象**通过**将Markdown原文以隐藏内容保存在笔记中**的精妙设计，实现了对Markdown的存储和再次编辑。既解决了其他产品只是单向导出HTML的单薄，又规避了服务端存储Markdown带来的隐私安全问题。这样，服务端仅作为对印象笔记 API调用和数据转换之用。
-
- >**隐私声明：用户所有的笔记数据，均保存在印象笔记中。马克飞象不存储用户的任何笔记数据。**
-
-#### 离线存储
-**马克飞象**使用浏览器离线存储将内容实时保存在本地，不必担心网络断掉或浏览器崩溃。为了节省空间和避免冲突，已同步至印象笔记并且不再修改的笔记将删除部分本地缓存，不过依然可以随时通过`文档管理`打开。
-
-> **注意：**虽然浏览器存储大部分时候都比较可靠，但印象笔记作为专业云存储，更值得信赖。以防万一，**请务必经常及时同步到印象笔记**。
-
-### 快捷键
-
-帮助    `Ctrl + /`
-同步文档    `Ctrl + S`
-创建文档    `Ctrl + Alt + N`
-最大化编辑器    `Ctrl + Enter`
-文档管理    `Ctrl + O`
-系统菜单    `Ctrl + M`
-
-整行移动    `Alt + 上/下箭头`
-删除整行    `Ctrl + D`
-
-加粗    `Ctrl + B`
-插入图片    `Ctrl + G`
-插入链接    `Ctrl + L`
-提升标题    `Ctrl + H`
-
-### 关于收费
-
-**马克飞象**目前已正式发布，为新用户提供 10 天的试用期，试用期过后需要[续费](maxiang.info/vip.html)才能继续使用。未购买或者未及时续费，将不能同步新的笔记。之前保存过的笔记依然可以编辑。
-
-
-### 反馈与建议
-- 微博：[@马克飞象](http://weibo.com/u/2788354117)，[@GGock](http://weibo.com/ggock "开发者个人账号")
-- 邮箱：<hustgock@gmail.com>
-
----------
-感谢阅读这份帮助文档。请点击右上角，绑定印象笔记账号，开启全新的记录与分享体验吧。
+You can conveniently export your documents to PDF (shortcut: `Ctrl + E`) and HTML (shortcut: `Shift + Ctrl + E`) with beautiful theme.
 
 
 
+## Feedback & Bug Report
+
+You can contact me via:
+
+- Twitter：[@egrcc](https://twitter.com/egrcc)
+- Weibo：[@egrcc](http://weibo.com/u/2948739432)
+- Email： [zhaolujun1994@gmail.com](mailto:zhaolujun1994@gmail.com)

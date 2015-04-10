@@ -1,0 +1,395 @@
+<html><head>
+  <meta charset="utf-8">
+  <title>Mango-Shortcut-Help.md</title>
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <!-- <link href="./css/markdown.css" rel="stylesheet"></link> -->
+  <link href="./css/test.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="./css/base.css" media="screen">
+  <!-- <link rel="stylesheet" type="text/css" href="./css/maxiang.css" media="screen" /> -->
+  <!-- <link rel="stylesheet" type="text/css" href="./js/highlight/styles/monokai_sublime_with_maxiang.css" media="screen" /> -->
+
+  
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/monokai_sublime.min.css">
+  
+	<script src="./js/jquery/jquery.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./js/highlight/highlight.pack.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+	<script type="text/javascript" src="./js/main.js"></script>
+  <script type="text/javascript" src="./js/editor.js"></script>
+  <script type="text/javascript" src="./js/menu.js"></script>
+	<script type="text/javascript" src="./js/taboverride/taboverride.min.js"></script>
+    <script type="text/x-mathjax-config;executed=true">
+      MathJax.Hub.Config({
+        showProcessingMessages: false,
+        // messageStyle: "none",
+        tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] },
+        TeX: { equationNumbers: {autoNumber: "AMS"} }
+      });
+    </script>
+    <script type="text/javascript" src="./node_modules/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<script type="text/javascript">
+		global.window = window;
+		global.$ = $;
+        // global.MathJax = MathJax;
+		global.gui = require('nw.gui');
+    hljs.initHighlightingOnLoad();
+		init();
+	</script>
+
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Hover_Arrow {position: absolute; width: 15px; height: 11px; cursor: pointer}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">.MathJax_Preview .MJXc-math {color: inherit!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXc-script {font-size: .8em}
+.MJXc-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXc-bold {font-weight: bold}
+.MJXc-italic {font-style: italic}
+.MJXc-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-largeop {font-size: 150%}
+.MJXc-largeop.MJXc-int {vertical-align: -.2em}
+.MJXc-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXc-display {display: block; text-align: center; margin: 1em 0}
+.MJXc-math span {display: inline-block}
+.MJXc-box {display: block!important; text-align: center}
+.MJXc-box:after {content: " "}
+.MJXc-rule {display: block!important; margin-top: .1em}
+.MJXc-char {display: block!important}
+.MJXc-mo {margin: 0 .15em}
+.MJXc-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXc-denom {display: inline-table!important; width: 100%}
+.MJXc-denom > * {display: table-row!important}
+.MJXc-surd {vertical-align: top}
+.MJXc-surd > * {display: block!important}
+.MJXc-script-box > *  {display: table!important; height: 50%}
+.MJXc-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXc-script-box > *:last-child > * {vertical-align: bottom}
+.MJXc-script-box > * > * > * {display: block!important}
+.MJXc-mphantom {visibility: hidden}
+.MJXc-munderover {display: inline-table!important}
+.MJXc-over {display: inline-block!important; text-align: center}
+.MJXc-over > * {display: block!important}
+.MJXc-munderover > * {display: table-row!important}
+.MJXc-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXc-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXc-mtr {display: table-row!important}
+.MJXc-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXc-mtr > .MJXc-mtd:first-child {padding-left: 0}
+.MJXc-mtr:first-child > .MJXc-mtd {padding-top: 0}
+.MJXc-mlabeledtr {display: table-row!important}
+.MJXc-mlabeledtr > .MJXc-mtd:first-child {padding-left: 0}
+.MJXc-mlabeledtr:first-child > .MJXc-mtd {padding-top: 0}
+.MJXc-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXc-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXc-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXc-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXc-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXc-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXc-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXc-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXc-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXc-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXc-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_CHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><style type="text/css">.MathJax_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax .merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MathJax .MJX-monospace {font-family: monospace}
+.MathJax .MJX-sans-serif {font-family: sans-serif}
+#MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: 5000em; max-height: 5000em; min-width: 0; min-height: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+img.MathJax_strut {border: 0!important; padding: 0!important; margin: 0!important; vertical-align: 0!important}
+.MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+.MathJax nobr {white-space: nowrap!important}
+.MathJax img {display: inline!important; float: none!important}
+.MathJax * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MathJax_Processed {display: none!important}
+.MathJax_ExBox {display: block!important; overflow: hidden; width: 1px; height: 60ex; min-height: 0; max-height: none}
+.MathJax .MathJax_EmBox {display: block!important; overflow: hidden; width: 1px; height: 60em; min-height: 0; max-height: none}
+.MathJax .MathJax_HitBox {cursor: text; background: white; opacity: 0; filter: alpha(opacity=0)}
+.MathJax .MathJax_HitBox * {filter: none; opacity: 1; background: transparent}
+#MathJax_Tooltip * {filter: none; opacity: 1; background: transparent}
+@font-face {font-family: MathJax_Caligraphic; src: url('file:///home/egrcc/Documents/nodejs/Mango/node_modules/mathjax/fonts/HTML-CSS/TeX/woff/MathJax_Caligraphic-Regular.woff?rev=2.5.1') format('woff'), url('file:///home/egrcc/Documents/nodejs/Mango/node_modules/mathjax/fonts/HTML-CSS/TeX/otf/MathJax_Caligraphic-Regular.otf?rev=2.5.1') format('opentype')}
+.MathJax .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_Hidden"></div></div><div id="MathJax_Message" style="display: none;"></div>
+  <div class="toolbar" style="display: none;">
+    <div class="image-background1" title=" Create a new file " style="margin-left: 5px;">
+      <input type="image" src="./img/mango_new_42.png" onclick="newFile()">
+    </div>
+    <div class="image-background1" title=" Open a file " style="margin-left: 8px;">
+      <input type="image" src="./img/mango_open_42.png" onclick="openFile()">
+    </div>
+    <div class="image-background1" title=" Save the current file " style="margin-left: 10px;">
+      <input type="image" src="./img/mango_save_42.png" onclick="saveFile()">
+    </div>
+    <div class="image-background1" title=" Undo the last action " style="margin-left: 28px;">
+      <input type="image" src="./img/mango_undo_42.png" onclick="undo()">
+    </div>
+    <div class="image-background1" title=" Redo the last undone action " style="margin-left: 10px;">
+      <input type="image" src="./img/mango_redo_42.png" onclick="redo()">
+    </div>
+    <div class="image-background1" title=" Edit mode " style="margin-left: 28px;">
+      <input type="image" src="./img/mango_edit_42.png" onclick="editMode()">
+    </div>
+    <div class="image-background1" title=" Preview mode " style="margin-left: 10px;">
+      <input type="image" src="./img/mango_preview_42.png" onclick="previewMode()">
+    </div>
+    <div class="image-background3" title=" Export to PDF ">
+      <input type="image" src="./img/mango_pdf_42.png" onclick="exportToPDF()">
+    </div>
+    <div class="image-background3" title=" Export to HTML ">
+      <input type="image" src="./img/mango_html_42.png" onclick="exportToHTML()">
+    </div>
+    <!-- <button style="background: url(./img/Mango1_48.png)"  /> -->
+  </div>
+	<input style="display:none;" id="openFileDialog" type="file">
+	<input style="display:none;" type="file" id="saveFileDialog" nwsaveas="file.md">
+  <input style="display:none;" type="file" id="saveasFileDialog" nwsaveas="">
+  <input style="display:none;" type="file" id="pdfFileDialog" nwsaveas="file.pdf">
+  <input style="display:none;" type="file" id="htmlFileDialog" nwsaveas="file.html">
+  <div class="background" style="top: 0px; background-color: rgb(255, 255, 255);">
+    <textarea name="markdown" id="editor" class="md_editor" data-taboverride-enabled="true" style="display: none;"></textarea>
+    <div class="md_result" id="preview" style="width: 99%; float: right; display: inline;"><h1 id="mango-shortcuts-help">Mango Shortcuts Help</h1>
+<h3 id="file">File</h3>
+<table>
+<thead>
+<tr>
+<th>Shortcut</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COMMAND (CTRL) - N</td>
+<td>Create a new file</td>
+</tr>
+<tr>
+<td>COMMAND (CTRL) - O</td>
+<td>Open a file</td>
+</tr>
+<tr>
+<td>COMMAND (CTRL) - S</td>
+<td>Save the current file</td>
+</tr>
+<tr>
+<td>COMMAND (CTRL) - SHIFT - S</td>
+<td>Save As</td>
+</tr>
+<tr>
+<td>COMMAND (CTRL) - Q</td>
+<td>Quit Mango</td>
+</tr>
+</tbody>
+</table>
+<h3 id="edit">Edit</h3>
+<table>
+<thead>
+<tr>
+<th>Shortcut</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COMMAND (CTRL) - Z</td>
+<td>Undo</td>
+</tr>
+<tr>
+<td>COMMAND (CTRL) - SHIFT - Z</td>
+<td>Redo</td>
+</tr>
+<tr>
+<td>COMMAND (CTRL) - X</td>
+<td>Cut</td>
+</tr>
+<tr>
+<td>COMMAND (CTRL) - C</td>
+<td>Copy</td>
+</tr>
+<tr>
+<td>COMMAND (CTRL) - V</td>
+<td>Paste</td>
+</tr>
+<tr>
+<td>COMMAND (CTRL) - A</td>
+<td>Select All</td>
+</tr>
+<tr>
+<td>COMMAND (CTRL) - D</td>
+<td>Delete </td>
+</tr>
+</tbody>
+</table>
+<h3 id="export">Export</h3>
+<table>
+<thead>
+<tr>
+<th>Shortcut</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COMMAND (CTRL) - E</td>
+<td>Export to PDF</td>
+</tr>
+<tr>
+<td>COMMAND (CTRL) - SHIFT - E</td>
+<td>Export to HTML</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mode">Mode</h3>
+<table>
+<thead>
+<tr>
+<th>Shortcut</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COMMAND (CTRL) - SHIFT - 1</td>
+<td>Editor : Viewer</td>
+</tr>
+<tr>
+<td>COMMAND (CTRL) - SHIFT - 2</td>
+<td>Viewer : Editor</td>
+</tr>
+<tr>
+<td>COMMAND (CTRL) - SHIFT - 3</td>
+<td>Editor </td>
+</tr>
+<tr>
+<td>COMMAND (CTRL) - SHIFT - 4</td>
+<td>Viewer</td>
+</tr>
+<tr>
+<td>COMMAND (CTRL) - H</td>
+<td>Hide Toolbar</td>
+</tr>
+<tr>
+<td>COMMAND (CTRL) - SHIFT - H</td>
+<td>Show Toolbar</td>
+</tr>
+<tr>
+<td>F11</td>
+<td>FullScreen</td>
+</tr>
+<tr>
+<td>F12</td>
+<td>Exit Fullscreen</td>
+</tr>
+</tbody>
+</table>
+</div>
+    <div id="buffer" style="display:none;
+              position:absolute; 
+              top:0; left: 0"># Mango Shortcuts Help
+
+### File
+
+Shortcut                         | Description
+---------------------------------|-------------------
+COMMAND (CTRL) - N               | Create a new file
+COMMAND (CTRL) - O               | Open a file
+COMMAND (CTRL) - S               | Save the current file
+COMMAND (CTRL) - SHIFT - S       | Save As
+COMMAND (CTRL) - Q               | Quit Mango
+
+
+### Edit
+
+ Shortcut                    | Description
+-----------------------------|---------------------
+COMMAND (CTRL) - Z           | Undo
+COMMAND (CTRL) - SHIFT - Z   | Redo
+COMMAND (CTRL) - X           | Cut
+COMMAND (CTRL) - C           | Copy
+COMMAND (CTRL) - V           | Paste
+COMMAND (CTRL) - A           | Select All
+COMMAND (CTRL) - D           | Delete 
+
+
+### Export
+
+Shortcut                         | Description
+---------------------------------|-------------------
+COMMAND (CTRL) - E               | Export to PDF
+COMMAND (CTRL) - SHIFT - E       | Export to HTML
+
+
+### Mode
+
+Shortcut                    | Description
+----------------------------|-----------------------
+COMMAND (CTRL) - SHIFT - 1  | Editor : Viewer
+COMMAND (CTRL) - SHIFT - 2  | Viewer : Editor
+COMMAND (CTRL) - SHIFT - 3  | Editor 
+COMMAND (CTRL) - SHIFT - 4  | Viewer
+COMMAND (CTRL) - H          | Hide Toolbar
+COMMAND (CTRL) - SHIFT - H  | Show Toolbar
+F11                         | FullScreen
+F12                         | Exit Fullscreen
+</div>
+  </div>
+    
+
+  <script type="text/javascript">
+      var $divs = $('textarea#editor, div#preview');
+      var sync = function(e){
+          var $other = $divs.not(this).off('scroll'), other = $other.get(0);
+          var percentage = this.scrollTop / (this.scrollHeight - this.offsetHeight);
+          other.scrollTop = percentage * (other.scrollHeight - other.offsetHeight);
+          setTimeout( function(){ $other.on('scroll', sync ); },200);
+      }
+      $divs.on('scroll', sync);
+
+      // var win = global.gui.Window.get();
+      // win.on('new-win-policy', function (frame, url, policy) {
+      //     global.gui.Shell.openExternal(url);
+      //     policy.ignore();
+      // });
+      $("html").on('click', 'a', function (e) {
+
+          e.preventDefault();
+          console.log("asd");
+          // Open URL with default browser.
+          global.gui.Shell.openExternal(e.target.href);
+
+      });
+  </script>
+  <script type="text/javascript" src="./node_modules/bootbox/bootbox.min.js"></script>
+  
+
+
+<div style="position: absolute; width: 0px; height: 0px; overflow: hidden; padding: 0px; border: 0px; margin: 0px;"><div id="MathJax_Font_Test" style="position: absolute; visibility: hidden; top: 0px; left: 0px; width: auto; padding: 0px; border: 0px; margin: 0px; white-space: nowrap; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; font-size: 40px; font-weight: normal; font-style: normal; font-family: MathJax_Size4, sans-serif;"></div></div></body></html>
