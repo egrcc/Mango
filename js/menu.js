@@ -467,11 +467,11 @@ function initMenu(){
 		}
 	}));
 
-	syncMenu = new global.gui.Menu();
-	syncMenu.append(new global.gui.MenuItem({
-		label: 'sync',
-		click: sync
-	}));
+	// syncMenu = new global.gui.Menu();
+	// syncMenu.append(new global.gui.MenuItem({
+	// 	label: 'sync',
+	// 	click: sync
+	// }));
 
 
 
@@ -480,7 +480,7 @@ function initMenu(){
 	menubar.append(new global.gui.MenuItem({ label: 'Edit', submenu: editMenu}));
 	menubar.append(new global.gui.MenuItem({ label: 'Export', submenu: exportMenu}));
 	menubar.append(new global.gui.MenuItem({ label: 'Mode', submenu: modeMenu}));
-	menubar.append(new global.gui.MenuItem({ label: 'Sync', submenu: syncMenu}));
+	// menubar.append(new global.gui.MenuItem({ label: 'Sync', submenu: syncMenu}));
 	menubar.append(new global.gui.MenuItem({ label: 'Help', submenu: helpMenu}));
 	win.menu = menubar;
 	win.on("close", close);
@@ -606,12 +606,51 @@ function checkSaved(callback) {
 	}
 }
 
+
+function newCheckSaved(callback) {
+
+	if (!isSaved) {
+
+		bootbox.dialog({
+		  message: "Do you want to save the file, then create another file?",
+		  // title: "Custom title",
+		  buttons: {
+		  	
+		    success: {
+		      label: "Save",
+		      className: "btn-success",
+		      callback: function() {
+		        save();
+		        callback();
+		      }
+		    },
+		    danger: {
+		      label: "Don't Save",
+		      className: "btn-danger",
+		      callback: function() {
+		        // global.gui.App.quit();
+		        callback();
+		      }
+		    }
+		    
+		  }
+		});
+	} else {
+		callback();
+	}
+}
+
+
 function newFile() {
-	isExist = false;
-	loadText("");
-	currentFileName = null;
-	global.$("title").html("Mango Editor for Markdown");
-	global.$("textarea").removeAttr("readonly");
+
+	newCheckSaved(function() {
+		isExist = false;
+		loadText("");
+		currentFileName = null;
+		global.$("title").html("Mango Editor for Markdown");
+		global.$("textarea").removeAttr("readonly");
+	});
+	
 }
 
 function openFile() {
@@ -670,7 +709,9 @@ function exportToPDF() {
 			var html = global.window.document.documentElement.outerHTML;
 			var options = {
 							"html" : html,
-							"css" :	"./js/highlight/styles/monokai_sublime_with_maxiang.css"
+							// "runnings" : "./running.js"
+							// "css" :	"./css/preview.css"
+							// "css" :	"./css/bootstrap.css"
 							// "js" : "./js/highlight/highlight.pack.js"
 						  };
 			console.log("pdf print");
@@ -690,7 +731,8 @@ function exportToPDF() {
 			var html = global.window.document.documentElement.outerHTML;
 			var options = {
 							"html" : html,
-							"css" :	"./js/highlight/styles/monokai_sublime_with_maxiang.css"
+							// "css" :	"./js/highlight/styles/monokai_sublime_with_maxiang.css"
+							// "css" :	"./css/preview.css"
 							// "js" : "./js/highlight/highlight.pack.js"
 						  };
 			console.log("pdf print");

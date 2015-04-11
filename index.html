@@ -3,12 +3,364 @@
 <head>
   <meta charset="utf-8" />
   <title>Mango Editor for Markdown</title>
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
   <style type="text/css">
+    /*
+
+    Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-license.org/
+
+    */
+
+    .hljs {
+      display: block;
+      overflow-x: auto;
+      padding: 0.5em;
+      background: #23241f;
+      -webkit-text-size-adjust: none;
+    }
+
+    .hljs,
+    .hljs-tag,
+    .css .hljs-rule,
+    .css .hljs-value,
+    .aspectj .hljs-function,
+    .css .hljs-function
+    .hljs-preprocessor,
+    .hljs-pragma {
+      color: #f8f8f2;
+    }
+
+    .hljs-strongemphasis,
+    .hljs-strong,
+    .hljs-emphasis {
+      color: #a8a8a2;
+    }
+
+    .hljs-bullet,
+    .hljs-blockquote,
+    .hljs-horizontal_rule,
+    .hljs-number,
+    .hljs-regexp,
+    .alias .hljs-keyword,
+    .hljs-literal,
+    .hljs-hexcolor {
+      color: #ae81ff;
+    }
+
+    .hljs-tag .hljs-value,
+    .hljs-code,
+    .hljs-title,
+    .css .hljs-class,
+    .hljs-class .hljs-title:last-child {
+      color: #a6e22e;
+    }
+
+    .hljs-link_url {
+      font-size: 80%;
+    }
+
+    .hljs-strong,
+    .hljs-strongemphasis {
+      font-weight: bold;
+    }
+
+    .hljs-emphasis,
+    .hljs-strongemphasis,
+    .hljs-class .hljs-title:last-child,
+    .hljs-typename {
+      font-style: italic;
+    }
+
+    .hljs-keyword,
+    .ruby .hljs-class .hljs-keyword:first-child,
+    .ruby .hljs-function .hljs-keyword,
+    .hljs-function,
+    .hljs-change,
+    .hljs-winutils,
+    .hljs-flow,
+    .nginx .hljs-title,
+    .tex .hljs-special,
+    .hljs-header,
+    .hljs-attribute,
+    .hljs-symbol,
+    .hljs-symbol .hljs-string,
+    .hljs-tag .hljs-title,
+    .hljs-value,
+    .alias .hljs-keyword:first-child,
+    .css .hljs-tag,
+    .css .unit,
+    .css .hljs-important {
+      color: #f92672;
+    }
+
+    .hljs-function .hljs-keyword,
+    .hljs-class .hljs-keyword:first-child,
+    .hljs-aspect .hljs-keyword:first-child,
+    .hljs-constant,
+    .hljs-typename,
+    .hljs-name,
+    .css .hljs-attribute {
+      color: #66d9ef;
+    }
+
+    .hljs-variable,
+    .hljs-params,
+    .hljs-class .hljs-title,
+    .hljs-aspect .hljs-title {
+      color: #f8f8f2;
+    }
+
+    .hljs-string,
+    .css .hljs-id,
+    .hljs-subst,
+    .hljs-type,
+    .ruby .hljs-class .hljs-parent,
+    .hljs-built_in,
+    .django .hljs-template_tag,
+    .django .hljs-variable,
+    .smalltalk .hljs-class,
+    .django .hljs-filter .hljs-argument,
+    .smalltalk .hljs-localvars,
+    .smalltalk .hljs-array,
+    .hljs-attr_selector,
+    .hljs-pseudo,
+    .hljs-addition,
+    .hljs-stream,
+    .hljs-envvar,
+    .apache .hljs-tag,
+    .apache .hljs-cbracket,
+    .tex .hljs-command,
+    .hljs-prompt,
+    .hljs-link_label,
+    .hljs-link_url {
+      color: #e6db74;
+    }
+
+    .hljs-comment,
+    .hljs-javadoc,
+    .hljs-annotation,
+    .hljs-decorator,
+    .hljs-pi,
+    .hljs-doctype,
+    .hljs-deletion,
+    .hljs-shebang,
+    .apache .hljs-sqbracket,
+    .tex .hljs-formula {
+      color: #75715e;
+    }
+
+    .coffeescript .javascript,
+    .javascript .xml,
+    .tex .hljs-formula,
+    .xml .javascript,
+    .xml .vbscript,
+    .xml .css,
+    .xml .hljs-cdata,
+    .xml .php,
+    .php .xml {
+      opacity: 0.5;
+    }
+
+
+    
+
+    a {
+      text-decoration:none;
+    }
+
+    .md_result{
+        font-family:Arial;
+        font-size:105%;
+        color: #2c3f51;
+        box-sizing:border-box;
+        background-color: #ffffff;
+        padding:10px 10px 13px 10px;
+        /*margin:0;*/
+        height:100%;
+    }
+
+    pre {
+        background-color: #23241f;
+        border-width: 0;
+        border-radius: 0;
+        padding: 10px;
+    }
+
+    pre code {
+      font-size: 14px;
+    }
+
+    code {
+      font-family: Courier New;
+      padding: 2px 4px;
+      font-size: 90%;
+      color: #2c3f51;
+      background-color: #e0e0e0;
+      border-radius: 4px;
+    }
+
+    /*p code {
+        color: #2c3f51;
+        background-color: #e0e0e0;
+        font-size: 14px;
+        padding: 3px;
+        border-radius: 3px;
+    }
+
+
+    ul code {
+        color: #2c3f51;
+        background-color: #e0e0e0;
+        padding: 3px;
+        font-size: 14px;
+        border-radius: 3px;
+    }
+    ol code {
+        color: #2c3f51;
+        background-color: #e0e0e0;
+        padding: 3px;
+        font-size: 14px;
+        border-radius: 3px;
+    }*/
+
+    h1, h2, h3, h4, h5, h6 {
+        /*color: #2c3f51;*/
+        font-weight: bold;
+    }
+
+    p {
+        /*color: #2c3f51;*/
+        font-size: 17px;
+        font-weight: 500;
+    }
+
+    ol, ul {
+        font-size: 17px;
+        font-weight: 500;
+    }
+
+    h1 {
+        font-size: 46px;
+        margin-bottom: 36px;
+        margin-top: 36px;
+        /*margin: 0.67em 0;*/
+    }
+    h2 {
+        font-size: 36px;
+    }
+    h3 {
+        font-size: 28px;
+    }
+    h4 {
+        font-size: 24px;
+    }
+    h5 {
+        font-size: 21px;
+    }
+    h6 {
+        font-size: 18px;
+    }
+
+    h2, h3 {
+        margin-bottom: 30px;
+        margin-top: 30px;
+    }
+
+    h4, h5, h6 {
+        margin-bottom: 24px;
+        margin-top: 24px;
+    }
+
+    blockquote {
+      background: #f9f9f9;
+      border-left: 10px solid #2196f3;
+      border-right: 1px solid  #2196f3;
+      font-family: Georgia, serif;
+      font-size: 16px;
+      line-height: 1.4;
+      color: #757575;
+      text-align: justify;
+      margin: 1.5em 10px;
+      padding: 0.5em 10px;
+      quotes: "\201C""\201D""\2018""\2019";
+    }
+    blockquote:before {
+      color: #ccc;
+      content: "\201C";
+      font-size: 4em;
+      line-height: 0.1em;
+      margin-right: 0.25em;
+      vertical-align: -0.4em;
+    }
+
+
+    blockquote p {
+      display: inline;
+    }
+
+    blockquote a{
+      text-decoration: none;
+      background: #eee;
+      cursor: pointer;
+      padding: 0 3px;
+      color: #2196f3;
+    }
+
+    blockquote a:hover{
+     color: #757575;
+    }
+
+    blockquote em{
+      font-style: italic;
+    }
+
+    table {
+      border-collapse:collapse;
+    }
+
+    table, th, td {
+
+        border: 1px solid #e0e0e0;
+
+    }
+
+    table th {
+
+        font-weight: bold;
+        padding: 10px;
+        color: #2c3f51;
+
+    }
+
+    table td {
+        
+        padding: 10px;
+        color: #2c3f51;
+    }
+
+
+    img {
+        max-width: 100%;
+    }
+
+    hr {
+      width: 90%;
+      height: 0;
+      -webkit-box-sizing: content-box;
+         -moz-box-sizing: content-box;
+              box-sizing: content-box;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      border: 0;
+      border-top: 1px solid #eee;
+    }
+
 
   </style>
-  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="./css/base.css" media="screen" />
-  <link rel="stylesheet" type="text/css" href="./js/highlight/styles/monokai_sublime_with_maxiang.css" media="screen" />
+  <!-- <link rel="stylesheet" type="text/css" href="./js/highlight/styles/monokai_sublime_with_maxiang.css" media="screen" /> -->
+  <!-- <link rel="stylesheet" type="text/css" href="./js/highlight/styles/monokai_sublime.css" media="screen" /> -->
+  <!-- <link rel="stylesheet" type="text/css" href="./css/preview.css" media="screen" /> -->
 
   
   <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/monokai_sublime.min.css"> -->
@@ -21,7 +373,7 @@
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script> -->
 	<script type="text/javascript" src="./js/main.js"></script>
   <script type="text/javascript" src="./js/editor.js"></script>
-  <script type="text/javascript" src="./js/sync.js"></script>
+  <!-- <script type="text/javascript" src="./js/sync.js"></script> -->
   <script type="text/javascript" src="./js/menu.js"></script>
 	<script type="text/javascript" src="./js/taboverride/taboverride.min.js"></script>
     <script type="text/x-mathjax-config">

@@ -1,7 +1,7 @@
 
 # Mango Editor for Markdown
 
-![Mango](./img/Mango1_256.png)
+![Mango](/home/egrcc/Documents/nodejs/Mango/img/Mango1_256.png)
 
 ## What is Mango?
 
