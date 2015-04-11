@@ -1,60 +1,8 @@
 
-// function preload(){
-// 	var marked = require("marked");
-// 	marked.setOptions({
-// 	renderer: new marked.Renderer(),
-// 		gfm: true,
-// 		tables: true,
-// 		breaks: false,
-// 		pedantic: false,
-// 		sanitize: false,
-// 		smartLists: true,
-// 		smartypants: false
-// 	});
-// 	var resultDiv = global.$('.md_result');
-// 	var buffer = global.window.document.getElementById("buffer");
-// 	var textEditor = global.$('#editor');
-// 	var text = textEditor.val();
-// 	buffer.innerHTML = (marked(text));
-// 	MathJax.Hub.Queue(["Typeset",MathJax.Hub,buffer],
-//       				  ["preview",this]);
-// 	hljs.initHighlighting.called = false;
-// 	hljs.initHighlighting();
-// }
+var lock = false;
 
 function preload(){
-	
-	var resultDiv = global.$('.md_result');
-	var buffer = global.window.document.getElementById("buffer");
-	var textEditor = global.$('#editor');
-	var text = textEditor.val();
-	text = escape(text);
-	buffer.innerHTML = (text);
-	MathJax.Hub.Queue(["Typeset",MathJax.Hub,buffer],
-      				  ["preview",this]);
 
-	
-	
-}
-
-function reload(){
-	preload();
-	if (currentFileName != null) {
-		global.$("title").html(currentFileName + '*');
-	}
-	isSaved = false;
-	
-};
-
-// function preview(){
-// 	setTimeout(function(){
-// 		var resultDiv = global.$('.md_result');
-// 		resultDiv.html(buffer.innerHTML);
-// 	}, 300);
-	
-// }
-
-function preview(){
 	var marked = require("marked");
 	marked.setOptions({
 	renderer: new marked.Renderer(),
@@ -66,16 +14,81 @@ function preview(){
 		smartLists: true,
 		smartypants: false
 	});
-	setTimeout(function(){
-		var resultDiv = global.$('.md_result');
-		var text = buffer.innerHTML;
-		text = text.replace(/&gt;/mg, '>');
-		resultDiv.html(marked(text));
-		hljs.initHighlighting.called = false;
-		hljs.initHighlighting();
-	}, 300);
+	var resultDiv = global.$('.md_result');
+	var buffer = global.window.document.getElementById("buffer");
+	var textEditor = global.$('#editor');
+	var text = textEditor.val();
+	if (lock == false) {
+		buffer.innerHTML = (marked(text));
+		MathJax.Hub.Queue(["Typeset",MathJax.Hub,buffer],
+      				  ["preview",this]);
+	}
+	
+	// MathJax.Hub.Queue(["Typeset",MathJax.Hub],
+ //      				  ["preview",this]);
+	hljs.initHighlighting.called = false;
+	hljs.initHighlighting();
+}
+
+// function preload(){
+	
+// 	var resultDiv = global.$('.md_result');
+// 	var buffer = global.window.document.getElementById("buffer");
+// 	var textEditor = global.$('#editor');
+// 	var text = textEditor.val();
+// 	text = escape(text);
+// 	buffer.innerHTML = (text);
+// 	MathJax.Hub.Queue(["Typeset",MathJax.Hub,buffer],
+//       				  ["preview",this]);
+
+	
+	
+// }
+
+function reload(){
+	preload();
+	if (currentFileName != null) {
+		global.$("title").html(currentFileName + '*');
+	}
+	isSaved = false;
+	
+};
+
+function preview(){
+
+	if (lock == false){
+		lock = true;
+		setTimeout(function(){
+			var resultDiv = global.$('.md_result');
+			resultDiv.html(buffer.innerHTML);
+			lock = false;
+		}, 300);
+	}
 	
 }
+
+// function preview(){
+// 	var marked = require("marked");
+// 	marked.setOptions({
+// 	renderer: new marked.Renderer(),
+// 		gfm: true,
+// 		tables: true,
+// 		breaks: false,
+// 		pedantic: false,
+// 		sanitize: false,
+// 		smartLists: true,
+// 		smartypants: false
+// 	});
+// 	setTimeout(function(){
+// 		var resultDiv = global.$('.md_result');
+// 		var text = buffer.innerHTML;
+// 		text = text.replace(/&gt;/mg, '>');
+// 		resultDiv.html(marked(text));
+// 		hljs.initHighlighting.called = false;
+// 		hljs.initHighlighting();
+// 	}, 300);
+	
+// }
 
 function escape(html, encode) {
     return html
@@ -107,7 +120,9 @@ function loadFile(file){
 function chooseFile(name, callback) {
 	var chooser = global.$(name);
 	chooser.change(function(evt) {
+		console.log("asd");
 		callback(global.$(this).val());
+		this.value = null;
 	});
 
 	chooser.trigger('click');

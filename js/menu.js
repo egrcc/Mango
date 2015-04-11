@@ -314,6 +314,7 @@ function initMenu(){
 				isExist = true;
 				currentFileName = "./doc/Mango-Help.md";
 				global.$("title").html("Mango-Help.md");
+				global.$("textarea").attr({"readonly": "readonly"});
 			});
 
 			
@@ -330,6 +331,7 @@ function initMenu(){
 				isExist = true;
 				currentFileName = "./doc/Mango-Shortcut-Help.md";
 				global.$("title").html("Mango-Shortcut-Help.md");
+				global.$("textarea").attr({"readonly": "readonly"});
 			});
 
 			
@@ -346,6 +348,7 @@ function initMenu(){
 				isExist = true;
 				currentFileName = "./doc/Markdown-Syntax-Help.md";
 				global.$("title").html("Markdown-Syntax-Help.md");
+				global.$("textarea").attr({"readonly": "readonly"});
 				
 			});
 			
@@ -429,6 +432,7 @@ function initMenu(){
 				isExist = true;
 				currentFileName = "./doc/Acknowlegements.md";
 				global.$("title").html("Acknowlegements.md");
+				global.$("textarea").attr({"readonly": "readonly"});
 				
 			});
 			
@@ -463,11 +467,20 @@ function initMenu(){
 		}
 	}));
 
+	syncMenu = new global.gui.Menu();
+	syncMenu.append(new global.gui.MenuItem({
+		label: 'sync',
+		click: sync
+	}));
+
+
+
 
 	menubar.append(new global.gui.MenuItem({ label: 'File', submenu: fileMenu}));
 	menubar.append(new global.gui.MenuItem({ label: 'Edit', submenu: editMenu}));
 	menubar.append(new global.gui.MenuItem({ label: 'Export', submenu: exportMenu}));
 	menubar.append(new global.gui.MenuItem({ label: 'Mode', submenu: modeMenu}));
+	menubar.append(new global.gui.MenuItem({ label: 'Sync', submenu: syncMenu}));
 	menubar.append(new global.gui.MenuItem({ label: 'Help', submenu: helpMenu}));
 	win.menu = menubar;
 	win.on("close", close);
@@ -598,6 +611,7 @@ function newFile() {
 	loadText("");
 	currentFileName = null;
 	global.$("title").html("Mango Editor for Markdown");
+	global.$("textarea").removeAttr("readonly");
 }
 
 function openFile() {
@@ -608,6 +622,7 @@ function openFile() {
 			isExist = true;
 			currentFileName = filename;
 			global.$("title").html(currentFileName);
+			global.$("textarea").removeAttr("readonly");
 		});
 	});
 }
@@ -662,7 +677,7 @@ function exportToPDF() {
 			showToolbar();
 			pdf.convert(options, function(result) {
 			    result.toFile(pdffilename, function() {});
-			    
+			    console.log("ok");
 			});
 		});
 	} else {

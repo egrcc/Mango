@@ -3,22 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <title>Mango Editor for Markdown</title>
+  <style type="text/css">
+
+  </style>
   <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <!-- <link href="./css/markdown.css" rel="stylesheet"></link> -->
-  <!-- <link href="./css/test.css" rel="stylesheet"></link> -->
 	<link rel="stylesheet" type="text/css" href="./css/base.css" media="screen" />
-  <!-- <link rel="stylesheet" type="text/css" href="./css/maxiang.css" media="screen" /> -->
   <link rel="stylesheet" type="text/css" href="./js/highlight/styles/monokai_sublime_with_maxiang.css" media="screen" />
 
   
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/monokai_sublime.min.css">
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/monokai_sublime.min.css"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/egrcc/Mango/master/js/highlight/styles/monokai_sublime_with_maxiang.css"> -->
   
 	<script src="./js/jquery/jquery.min.js" type="text/javascript"></script>
   <script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="./js/highlight/highlight.pack.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script>
+  <!-- <script type="text/javascript" src="./js/evernote/evernote-sdk-minified.js"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js"></script> -->
 	<script type="text/javascript" src="./js/main.js"></script>
   <script type="text/javascript" src="./js/editor.js"></script>
+  <script type="text/javascript" src="./js/sync.js"></script>
   <script type="text/javascript" src="./js/menu.js"></script>
 	<script type="text/javascript" src="./js/taboverride/taboverride.min.js"></script>
     <script type="text/x-mathjax-config">
@@ -30,11 +33,10 @@
       });
     </script>
     <script type="text/javascript" src="./node_modules/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!-- <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 	<script type="text/javascript">
 		global.window = window;
 		global.$ = $;
-        // global.MathJax = MathJax;
 		global.gui = require('nw.gui');
     hljs.initHighlightingOnLoad();
 		init();

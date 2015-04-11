@@ -30,7 +30,7 @@ For detailed Markdown syntax, please see **Markdown Syntax Help** in help menu.
 
 #### 3 . Mathematics Expression
 
-With **MathJax** support you can render beautiful **LaTeX** expressions. For inline formulas, enclose the formula in $\$...\$$. For displayed formulas, use $\$\$...\$\$$. For example:
+With **MathJax** support you can render beautiful **LaTeX** expressions. For inline formulas, enclose the formula in `$...$`. For displayed formulas, use `$$...$$`. For example:
 
 **Pythagorean theorem**: $a^2 + b^2 = c^2$.
 

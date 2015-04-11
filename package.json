@@ -29,6 +29,7 @@
 		"phantom-html2pdf": "~0.1.3",
 		"MathJax-node": "~0.3.0",
 		"nimble": "*",
+		"evernote": "~1.25.4",
 		"html-pdf": "~1.1.0",
 		"remarkable": "~1.6.0"
   }
