@@ -311,11 +311,11 @@ function initMenu(){
 
 			checkSaved(function() {
 				currentDirectory = null;
-				loadFile("./doc/Mango-Help.md");
+				loadFile("./docs/Mango-Help.md");
 				// isSaved = true;
 				isExist = true;
 
-				currentFileName = "./doc/Mango-Help.md";
+				currentFileName = "./docs/Mango-Help.md";
 				global.$("title").html("Mango-Help.md" + " --- Mango");
 				global.$("textarea").attr({"readonly": "readonly"});
 			});
@@ -330,10 +330,10 @@ function initMenu(){
 
 			checkSaved(function() {
 				currentDirectory = null;
-				loadFile("./doc/Mango-Shortcut-Help.md");
+				loadFile("./docs/Mango-Shortcut-Help.md");
 				// isSaved = true;
 				isExist = true;
-				currentFileName = "./doc/Mango-Shortcut-Help.md";
+				currentFileName = "./docs/Mango-Shortcut-Help.md";
 				global.$("title").html("Mango-Shortcut-Help.md" + " --- Mango");
 				global.$("textarea").attr({"readonly": "readonly"});
 			});
@@ -348,10 +348,10 @@ function initMenu(){
 
 			checkSaved(function() {
 				currentDirectory = null;
-				loadFile("./doc/Markdown-Syntax-Help.md");
+				loadFile("./docs/Markdown-Syntax-Help.md");
 				// isSaved = true;
 				isExist = true;
-				currentFileName = "./doc/Markdown-Syntax-Help.md";
+				currentFileName = "./docs/Markdown-Syntax-Help.md";
 				global.$("title").html("Markdown-Syntax-Help.md" + " --- Mango");
 				global.$("textarea").attr({"readonly": "readonly"});
 				
@@ -433,10 +433,10 @@ function initMenu(){
 
 			checkSaved(function() {
 				currentDirectory = null;
-				loadFile("./doc/Acknowlegements.md");
+				loadFile("./docs/Acknowlegements.md");
 				// isSaved = true;
 				isExist = true;
-				currentFileName = "./doc/Acknowlegements.md";
+				currentFileName = "./docs/Acknowlegements.md";
 				global.$("title").html("Acknowlegements.md" + " --- Mango");
 				global.$("textarea").attr({"readonly": "readonly"});
 				
