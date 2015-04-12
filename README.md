@@ -59,7 +59,7 @@ If you have NW.js installed, you also can run from source code.
 
 ## Acknowlegements
 
-**Mango** is a open source project, and uses many other open sources projects. For detailed information, please see [**Acknowlegements**](./docs/Acknowlegements.md) in docs. 
+**Mango** is a open source project, and uses many other open source projects. For detailed information, please see [**Acknowlegements**](./docs/Acknowlegements.md) in docs. 
 
 ## License
 

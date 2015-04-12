@@ -7,7 +7,7 @@
 
 **Mango** is a Markdown editor designed for Linux, also supports Windows and Mac OSX. It's not only supports Markdown, but also extends Markdown syntax with some nice features to help people conveniently write **mathematical formula** and **code**.
 
-**Mango** is a open source project in [Github](https://github.com/egrcc/Mango), and uses many other open sources projects. For detailed information, please see **Acknowlegements** in help menu.   
+**Mango** is a open source project in [Github](https://github.com/egrcc/Mango), and uses many other open source projects. For detailed information, please see **Acknowlegements** in help menu.   
 
 
 ## What is Markdown?
