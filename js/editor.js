@@ -48,7 +48,7 @@ function preload(){
 function reload(){
 	preload();
 	if (currentFileName != null) {
-		global.$("title").html(currentFileName + '*');
+		global.$("title").html(currentFileName + '*' + " --- Mango");
 	}
 	isSaved = false;
 	
@@ -59,7 +59,21 @@ function preview(){
 	if (lock == false){
 		lock = true;
 		setTimeout(function(){
+			var path = require('path');
 			var resultDiv = global.$('.md_result');
+
+			if (currentDirectory != null) {
+				$("#buffer img").each(function() {
+				    // console.log(global.$(this).attr("src"));
+				    // console.log(path.basename(global.$(this).attr("src")));
+				    if (global.$(this).attr("src").indexOf('.') == 0) {
+				    	filePath = global.$(this).attr("src").substring(1);
+				    	console.log(currentDirectory + filePath);
+				    	global.$(this).attr("src", currentDirectory + filePath);
+				    }
+				});
+			}
+			
 			resultDiv.html(buffer.innerHTML);
 			lock = false;
 		}, 300);
@@ -122,6 +136,23 @@ function chooseFile(name, callback) {
 	chooser.change(function(evt) {
 		console.log("asd");
 		callback(global.$(this).val());
+		this.value = null;
+	});
+
+	chooser.trigger('click');
+};
+
+
+function openChooseFile(name, callback) {
+	var chooser = global.$(name);
+	chooser.change(function(evt) {
+		console.log(process.cwd());
+		callback(global.$(this).val());
+		// this.value = null;
+	});
+	chooser.click(function() {
+		// console.log("asd");
+		// callback(global.$(this).val());
 		this.value = null;
 	});
 

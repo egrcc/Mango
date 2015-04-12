@@ -2,6 +2,7 @@
 
 var isExist = false;
 var currentFileName;
+var currentDirectory = null;
 var isSaved = true;
 var isHide = false;
 
@@ -309,11 +310,13 @@ function initMenu(){
 		click: function(){
 
 			checkSaved(function() {
+				currentDirectory = null;
 				loadFile("./doc/Mango-Help.md");
 				// isSaved = true;
 				isExist = true;
+
 				currentFileName = "./doc/Mango-Help.md";
-				global.$("title").html("Mango-Help.md");
+				global.$("title").html("Mango-Help.md" + " --- Mango");
 				global.$("textarea").attr({"readonly": "readonly"});
 			});
 
@@ -326,11 +329,12 @@ function initMenu(){
 		click: function(){
 
 			checkSaved(function() {
+				currentDirectory = null;
 				loadFile("./doc/Mango-Shortcut-Help.md");
 				// isSaved = true;
 				isExist = true;
 				currentFileName = "./doc/Mango-Shortcut-Help.md";
-				global.$("title").html("Mango-Shortcut-Help.md");
+				global.$("title").html("Mango-Shortcut-Help.md" + " --- Mango");
 				global.$("textarea").attr({"readonly": "readonly"});
 			});
 
@@ -343,11 +347,12 @@ function initMenu(){
 		click: function(){
 
 			checkSaved(function() {
+				currentDirectory = null;
 				loadFile("./doc/Markdown-Syntax-Help.md");
 				// isSaved = true;
 				isExist = true;
 				currentFileName = "./doc/Markdown-Syntax-Help.md";
-				global.$("title").html("Markdown-Syntax-Help.md");
+				global.$("title").html("Markdown-Syntax-Help.md" + " --- Mango");
 				global.$("textarea").attr({"readonly": "readonly"});
 				
 			});
@@ -427,11 +432,12 @@ function initMenu(){
 		click: function(){
 
 			checkSaved(function() {
+				currentDirectory = null;
 				loadFile("./doc/Acknowlegements.md");
 				// isSaved = true;
 				isExist = true;
 				currentFileName = "./doc/Acknowlegements.md";
-				global.$("title").html("Acknowlegements.md");
+				global.$("title").html("Acknowlegements.md" + " --- Mango");
 				global.$("textarea").attr({"readonly": "readonly"});
 				
 			});
@@ -502,7 +508,7 @@ function save() {
 	if (isExist) {
 		var fs = require('fs');
 		var textEditor = global.$('#editor');
-		global.$("title").html(currentFileName);
+		global.$("title").html(currentFileName + " --- Mango");
 		fs.writeFile(currentFileName, textEditor.val(), function(err) {
 			if(err) {
 				console.log(err);
@@ -514,6 +520,7 @@ function save() {
 	} else {
 		chooseFile("#saveFileDialog", function(filename){
 			var fs = require('fs');
+			var path = require("path");
 			var textEditor = global.$('#editor');
 			fs.writeFile(filename, textEditor.val(), function(err) {
 				if(err) {
@@ -521,7 +528,9 @@ function save() {
 				} else {
 					isSaved = true;
 					currentFileName = filename;
-					global.$("title").html(currentFileName);
+					currentDirectory = path.dirname(currentFileName);
+					console.log(currentDirectory);
+					global.$("title").html(currentFileName + " --- Mango");
 					isExist = true;
 					console.log("The file was saved!");
 				}
@@ -644,6 +653,7 @@ function newCheckSaved(callback) {
 function newFile() {
 
 	newCheckSaved(function() {
+		currentDirectory = null;
 		isExist = false;
 		loadText("");
 		currentFileName = null;
@@ -655,12 +665,16 @@ function newFile() {
 
 function openFile() {
 	checkSaved(function() {
-		chooseFile("#openFileDialog", function(filename){
+		openChooseFile("#openFileDialog", function(filename){
+			var path = require('path');
 			loadFile(filename);
 			// isSaved = true;
 			isExist = true;
+			console.log(filename);
 			currentFileName = filename;
-			global.$("title").html(currentFileName);
+			currentDirectory = path.dirname(currentFileName);
+			console.log(currentDirectory);
+			global.$("title").html(currentFileName + " --- Mango");
 			global.$("textarea").removeAttr("readonly");
 		});
 	});
