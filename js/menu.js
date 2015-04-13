@@ -711,8 +711,9 @@ function previewMode() {
 }
 
 function exportToPDF() {
-	console.log("pdf");
+	console.log(isHide.toString());
 	if (!isHide) {
+		console.log("pdf");
 		hideToolbar();
 		changeModeToViewer();
 		// global.$('#saveFileDialog').attr({"nwsaveas":"file.pdf"});
@@ -736,9 +737,10 @@ function exportToPDF() {
 			});
 		});
 	} else {
+		console.log("pdf2");
 		changeModeToViewer();
 		// global.$('#saveFileDialog').attr({"nwsaveas":"file.pdf"});
-		chooseFile("#pdfFileDialog", function(pdffilename){
+		chooseFile("#pdf2FileDialog", function(pdffilename){
 
 			var fs = require('fs');
 			var pdf = require('phantom-html2pdf');
@@ -749,9 +751,10 @@ function exportToPDF() {
 							// "css" :	"./css/preview.css"
 							// "js" : "./js/highlight/highlight.pack.js"
 						  };
-			console.log("pdf print");
+			console.log("pdf2 print");
 			pdf.convert(options, function(result) {
 			    result.toFile(pdffilename, function() {});
+			    console.log("ok2");
 			    // showToolbar();
 			});
 		});
@@ -783,8 +786,8 @@ function exportToHTML() {
 		changeModeToViewer();
 		// global.$('#saveFileDialog').attr({"nwsaveas":"file.html"});
 		console.log("html2");
-		chooseFile("#htmlFileDialog", function(filename){
-			console.log("html print");
+		chooseFile("#html2FileDialog", function(filename){
+			console.log("html2 print");
 			var fs = require('fs');
 			fs.writeFile(filename, global.window.document.documentElement.outerHTML, function(err) {
 				if(err) {

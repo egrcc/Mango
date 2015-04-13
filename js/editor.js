@@ -136,6 +136,12 @@ function chooseFile(name, callback) {
 	chooser.change(function(evt) {
 		console.log("asd");
 		callback(global.$(this).val());
+		// this.value = null;
+	});
+
+	chooser.click(function() {
+		// console.log("asd");
+		// callback(global.$(this).val());
 		this.value = null;
 	});
 
