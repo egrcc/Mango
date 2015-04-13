@@ -723,7 +723,7 @@ function exportToPDF() {
 			var pdf = require('phantom-html2pdf');
 			var html = global.window.document.documentElement.outerHTML;
 			var options = {
-							"html" : html,
+							"html" : html
 							// "runnings" : "./running.js"
 							// "css" :	"./css/preview.css"
 							// "css" :	"./css/bootstrap.css"
@@ -746,7 +746,7 @@ function exportToPDF() {
 			var pdf = require('phantom-html2pdf');
 			var html = global.window.document.documentElement.outerHTML;
 			var options = {
-							"html" : html,
+							"html" : html
 							// "css" :	"./js/highlight/styles/monokai_sublime_with_maxiang.css"
 							// "css" :	"./css/preview.css"
 							// "js" : "./js/highlight/highlight.pack.js"
@@ -761,6 +761,25 @@ function exportToPDF() {
 	}
 	
 }
+
+// function exportToPDF() {
+// 	var phantom = require('phantom');
+// 	var html = global.window.document.documentElement.outerHTML;
+// 	phantom.create(function (ph) {
+// 	  ph.createPage(function (page) {
+// 	      page.set('viewportSize', {width:1440,height:900})
+
+// 	      //like this
+// 	      page.set('content', html);
+
+// 	      page.render("path_to_pdf.pdf", function() { 
+// 	        //now pdf is written to disk.
+// 	        ph.exit();
+// 	      });
+// 	  });
+// 	});
+
+// }
 
 function exportToHTML() {
 	console.log("html");

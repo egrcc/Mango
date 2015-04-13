@@ -1,0 +1,34 @@
+{
+  "name": "Mango",
+  "version": "0.1.0",
+  "description": "Markdown Editor",
+  "main": "index.html",
+  "author": "zhaolujun1994@gmail.com",
+  "license": "GPL3",
+  "single-instance": false,
+  "window": {
+	"toolbar": false,
+	"show": true,
+	"width": 1000,
+    "height": 600,
+	"min_width": 800,
+    "min_height": 500,
+	"icon": "./img/Mango1.png"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/egrcc/Mango.git"
+  },
+  "dependencies": {
+		"marked": "^0.3.3",
+		"bootbox": "~4.4.0",
+		"request": "~2.55.0",
+		"bootstrap": "3.3.0",
+		"wkhtmltopdf": "~0.1.5",
+		"phantom": "~0.7.2",
+		"phantomjs": "~1.9.16",
+		"phantom-html2pdf": "~0.1.3",
+		"nimble": "*",
+		"evernote": "~1.25.4"
+  }
+}
