@@ -370,7 +370,7 @@ function initMenu(){
 			var request = require('request');
 			request('http://xunmiweb.sinaapp.com/version', function (error, response, body) {
 			  if (!error && response.statusCode == 200) {
-			    console.log(body); // Show the HTML for the Google homepage. 
+			    console.log(body); 
 			    JSON.parse(body, function(k, v) {
 				    if (k === 'Mango_version') {
 				   	    console.log(v); 
@@ -747,7 +747,6 @@ function exportToPDF() {
 			var html = global.window.document.documentElement.outerHTML;
 			var options = {
 							"html" : html
-							// "css" :	"./js/highlight/styles/monokai_sublime_with_maxiang.css"
 							// "css" :	"./css/preview.css"
 							// "js" : "./js/highlight/highlight.pack.js"
 						  };
