@@ -5,7 +5,9 @@
 
 ## What is Mango?
 
-**Mango** is a Markdown editor designed for Linux, also supports Windows and Mac OSX. It's not only supports Markdown, but also extends Markdown syntax with some nice features to help people conveniently write **mathematical formula** and **code**.
+**Mango** is a Markdown editor designed for Linux, also supports Windows and Mac OSX. It's not only supports Markdown, but also extends Markdown syntax with some nice features to help people conveniently write **mathematical formula** and **code**. I write a blog in [here](http://egrcc.github.io/2015/04/12/mango-tutorial/) (in chinese) describe the implement of Mango.
+
+中文说明见[这里](./README-zh.md).
 
 ## Main Features
 
@@ -52,8 +54,9 @@ You can conveniently export your documents to PDF (shortcut: `Ctrl + E`) and HTM
 
 ## Downloads
 
-- **Linux**: 32bit / 64bit
-- **Windows**: 32bit / 64bit
+- **Linux**: [32bit](./dists/mango-v0.1.0-linux-ia32.tar.gz) / [64bit](./dists/mango-v0.1.0-linux-x64.tar.gz)
+- **Windows**: [32bit](./dists/mango-v0.1.0-win-ia32.zip) / [64bit](./dists/mango-v0.1.0-win-x64.zip)
+- **Mac OSX**: 32bit / 64bit
 
 If you have NW.js installed, you also can run from source code.
 
