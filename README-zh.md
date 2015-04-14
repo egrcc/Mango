@@ -50,8 +50,8 @@ Mango 默认左边是编辑区，右边是预览区。在编辑区的修改会�
 
 ## 下载
 
-- **Linux**: [32bit](./dists/mango-v0.1.0-linux-ia32.tar.gz?raw=true) / [64bit](./dists/mango-v0.1.0-linux-x64.tar.gz?raw=true)
-- **Windows**: [32bit](./dists/mango-v0.1.0-win-ia32.zip?raw=true) / [64bit](./dists/mango-v0.1.0-win-x64.zip?raw=true)
+- **Linux**: [32bit](https://github.com/egrcc/Mango-dists/blob/master/mango-v0.1.0-linux-ia32.tar.gz?raw=true) / [64bit](https://github.com/egrcc/Mango-dists/blob/master/mango-v0.1.0-linux-x64.tar.gz?raw=true)
+- **Windows**: [32bit](https://github.com/egrcc/Mango-dists/blob/master/mango-v0.1.0-win-ia32.zip?raw=true) / [64bit](https://github.com/egrcc/Mango-dists/blob/master/mango-v0.1.0-win-x64.zip?raw=true)
 - **Mac OSX**: 32bit / 64bit
 
 如果觉得下载过慢，也可用下面百度云的链接下载：
