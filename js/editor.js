@@ -1,4 +1,45 @@
-
+/*
+                                ;!!!!!!!!!!!!!!!!!!!!;                                
+                           !!!!!!!!!!!!!!ooooo!!!!!!!!!!!!!                           
+                       !!!!!!!!oooooooooooooooooooooooo!!!!!!!!                       
+                    !!!!!!oooooooooooooooooooooooooooooooooo!!!!!!                    
+                 !!!!!!oooooooooooooooooooooooooooooooooooooooo!!!!!!                 
+               !!!!!oooooooooooooooooooooooooooooooooooooooooooooo!!!!!               
+             !!!!!oooooooooooooooooooooooooooooooooooooooooooooooooo!!!!!             
+           ;!!!!oooooooooooooooooooooooooooooooooooooooooooooooooooooo!!!!!           
+          !!!!oooooooooooooooooooooooooooooooooooooooooooooooooooooooooo!!!!          
+         !!!!ooooooooooooo     oooooooooooooooooooooooooooooooooooooooooo!!!!         
+        !!!oooooooooooooooo     ooooooooooooooooooooooooooooooooooooooooooo!!!;       
+       !!!oooooooooooooooooo     ooooooooooooooooooooooo      oooooooooooooo!!!;      
+      !!!ooooooooooooooooooo     ooooooooooooooooooooooo      ooooooooooooooo!!!      
+     !!!!oooooooooooooooooooo     ooooooooooooooooooooo       oooooooooooooooo!!!     
+    ;!!!ooooooooooooooooooooo!     ooooooooooooooooooo!       oooooooooooooooo!!!!    
+    !!!oooooooooooooooooooooo      ooooooooooooooooooo  o     ooooooooooooooooo!!!    
+    !!!ooooooooooooooooooooo;       ooooooooooooooooo  ;     oooooooooooooooooo!!!;   
+   !!!!ooooooooooooooooooooo   ;    !oooooooooooooo!   o     oooooooooooooooooo!!!!   
+   !!!!oooooooooooooooooooo    o     ooooooooooooo    oo     ooooooooooooooooooo!!!   
+   !!!ooooooooooooooooooooo    oo     ooooooooooo    ooo     ooooooooooooooooooo!!!   
+   !!!oooooooooooooooooooo    oooo     ooooooooo   ;ooo!    ;ooooooooooooooooooo!!!   
+   !!!!ooooooooooooooooooo    ooooo     oooooo    ooooo     oooooooooooooooooooo!!!   
+   ;!!!oooooooooooooooooo    ;oooooo      o      oooooo     ooooooooooooooooooo!!!!   
+    !!!oooooooooooooooooo    oooooooo          oooooooo     ooooooooooooooooooo!!!    
+    !!!!oooooooooooooooo     oooooooooo     !oooooooooo     ooooooooooooooooooo!!!    
+     !!!oooooooooooooooo    oooooooooooooooooooooooooo!    !oooooooooooooooooo!!!     
+     !!!!oooooooooooooo     oooooooooooooooooooooooooo     oooooooooooooooooo!!!!     
+      !!!!ooooooooooooo     oooooooooooooooooooooooooo     ;oooooooooooooooo!!!!      
+       !!!!oooooooooooo      ooooooooooooooooooooooooo;     ooooooooooooooo!!!!       
+        !!!!ooooooooooooooooooooooooooooooooooooooooooo      ooooooooooooo!!!!        
+         !!!!oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo!!!!         
+           !!!!oooooooooooooooooooooooooooooooooooooooooooooooooooooooo!!!!;          
+            !!!!!ooooooooooooooooooooooooooooooooooooooooooooooooooooo!!!!            
+              !!!!!oooooooooooooooooooooooooooooooooooooooooooooooo!!!!!              
+                !!!!!oooooooooooooooooooooooooooooooooooooooooooo!!!!!                
+                  !!!!!!oooooooooooooooooooooooooooooooooooooo!!!!!!                  
+                     !!!!!!!oooooooooooooooooooooooooooooo!!!!!!!                     
+                        ;!!!!!!!!!ooooooooooooooooooo!!!!!!!!!                        
+                             !!!!!!!!!!!!!!!!!!!!!!!!!!!!                             
+                                    ;!!!!!!!!!!!!!                                    
+*/
 var lock = false;
 
 function preload(){
