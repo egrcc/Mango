@@ -38,6 +38,9 @@ You can write code like below, that will highlighted in the Live Preview:
 
 You can conveniently export your documents to PDF (shortcut: `Ctrl + E`) and HTML (shortcut: `Shift + Ctrl + E`) with beautiful theme.
 
+
+#### 6. Paste pictures to qiniu 
+
 ## Screenshots
 
 ![](./img/readme_screenshot1.png)
