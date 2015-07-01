@@ -205,3 +205,8 @@ function openChooseFile(name, callback) {
 
 	chooser.trigger('click');
 };
+
+function uploadfile(){
+	console.log("uploadfile");
+
+};

@@ -421,7 +421,10 @@
   <script type="text/javascript" src="./js/editor.js"></script>
   <!-- <script type="text/javascript" src="./js/sync.js"></script> -->
   <script type="text/javascript" src="./js/menu.js"></script>
+<script type="text/javascript" src="./js/copy.js"></script>
+<script type="text/javascript" src="./node_modules/node-uuid/uuid.js"></script>
 	<script type="text/javascript" src="./js/taboverride/taboverride.min.js"></script>
+<script src="./js/ZeroClipboard.min.js"></script>
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         showProcessingMessages: false,
@@ -481,7 +484,10 @@
   <input style="display:none;" type="file"  id="pdf2FileDialog" nwsaveas="file.pdf" />
   <input style="display:none;" type="file"  id="html2FileDialog" nwsaveas="file.html" />
   <div class="background">
+    <div id="test">
+    </div>
     <textarea name="markdown" id="editor" class="md_editor"></textarea>
+    
     <div class="md_result" id="preview">
       
     </div>
@@ -515,6 +521,24 @@
           global.gui.Shell.openExternal(e.target.href);
 
       });
+
+document.body.onpaste = function(e) {
+    var items = e.clipboardData.items;
+    var uuid = require('node-uuid');
+    for (var i = 0; i < items.length; ++i) {
+        var item = e.clipboardData.items[i];
+        if (items[i].kind == 'file' && items[i].type == 'image/png') {
+            var file=item.getAsFile();
+            var token=gettoken();
+  	    var key=uuid.v1()+".png";
+	    qiniuUpload(file,token,key,callback);
+	    console.log("finish");
+	    break;
+        }
+    }
+};
+
+     
   </script>
   <script type="text/javascript" src="./node_modules/bootbox/bootbox.min.js"></script>
   
