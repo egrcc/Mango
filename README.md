@@ -5,7 +5,7 @@
 
 ## What is Mango?
 
-**Mango** is a Markdown editor designed for Linux, also supports Windows and Mac OSX. It's not only supports Markdown, but also extends Markdown syntax with some nice features to help people conveniently write **mathematical formula** and **code**. I write a blog in [here](http://egrcc.github.io/2015/04/12/mango-tutorial/) (in chinese) describe the implement of Mango.
+**Mango** is a Markdown editor designed for Linux, also supports Windows and Mac OSX. It's not only supports Markdown, but also extends Markdown syntax with some nice features to help people conveniently write **mathematical formula** and **code**. I wrote a blog in [here](http://egrcc.github.io/2015/04/12/mango-tutorial/) (in chinese) which describes the implementation of Mango.
 
 中文说明见[这里](./README-zh.md).
 
