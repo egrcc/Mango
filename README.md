@@ -58,7 +58,7 @@ You can conveniently export your documents to PDF (shortcut: `Ctrl + E`) and HTM
 - **Windows**: [32bit](https://github.com/egrcc/Mango-dists/blob/master/mango-v0.1.0-win-ia32.zip?raw=true) / [64bit](https://github.com/egrcc/Mango-dists/blob/master/mango-v0.1.0-win-x64.zip?raw=true)
 - **Mac OSX**: 32bit / 64bit
 
-If you have NW.js installed, you also can run from source code.
+If you have NW.js installed, you can also run from source code.
 
 ## Acknowlegements
 
